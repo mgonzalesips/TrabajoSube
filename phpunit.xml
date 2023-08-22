@@ -15,11 +15,9 @@
         </testsuite>
     </testsuites>
 
-
-    <!-- <coverage>
-        <whitelist>
-            <directory>src</directory>
-        </whitelist>
-    </coverage> -->
-
+    <coverage>
+        <include>
+            <directory suffix='.php'>./src</directory>
+        </include>
+    </coverage>
 </phpunit>
