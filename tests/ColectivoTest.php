@@ -27,7 +27,7 @@ class ColectivoTest extends TestCase
         $tarjeta = new Tarjeta(100); // Creamos una tarjeta con saldo de 100
         $colectivo = new Colectivo();
 
-        $this->expectException(Exception::class); // Esperamos una excepción
+        $this->expectException(Exception); // Esperamos una excepción
         $colectivo->pagarCon($tarjeta);
     }
 }
