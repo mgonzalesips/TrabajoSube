@@ -3,7 +3,7 @@
         'name' => 'phpunit/trabajosube',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '6a15de33c0d80191fa7a37f325ce664c5a9b500c',
+        'reference' => '08758191c3a099838c64d3f5984501b399369fb1',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -103,7 +103,7 @@
         'phpunit/trabajosube' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '6a15de33c0d80191fa7a37f325ce664c5a9b500c',
+            'reference' => '08758191c3a099838c64d3f5984501b399369fb1',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

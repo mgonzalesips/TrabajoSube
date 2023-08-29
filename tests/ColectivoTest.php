@@ -3,54 +3,34 @@
 namespace TrabajoSube;
 
 use PHPUnit\Framework\TestCase;
+use TrabajoSube\Colectivo;
+use TrabajoSube\Tarjeta;
+use TrabajoSube\Boleto;
 
 class ColectivoTest extends TestCase
 {
-    function testTarjeta()
+    public function testPagarConSaldoSuficiente()
     {
-        $tarjeta = new Tarjeta(500);
-
-        echo "Saldo inicial: {$tarjeta->getSaldo()}\n";
-        $tarjeta->cargarSaldo(300);
-        echo "Saldo después de cargar \$300: {$tarjeta->getSaldo()}\n";
-
-        try {
-            $tarjeta->cargarSaldo(-100); // Intentar cargar saldo negativo
-        } catch (Exception $e) {
-            echo "Error al cargar saldo negativo: {$e->getMessage()}\n";
-        }
-
-        echo "Saldo final: {$tarjeta->getSaldo()}\n";
-    }
-
-    // Test de la clase Colectivo
-    function testColectivo()
-    {
-        $tarjeta = new Tarjeta(500);
+        $tarjeta = new Tarjeta(150); // Creamos una tarjeta con saldo de 150
         $colectivo = new Colectivo();
 
-        try {
-            $boleto = $colectivo->pagarCon($tarjeta);
-            echo "Se ha pagado un pasaje. Monto: {$boleto->getMonto()}, Saldo restante: {$boleto->getSaldoRestante()}\n";
-        } catch (Exception $e) {
-            echo "Error al pagar el pasaje: {$e->getMessage()}\n";
-        }
+        $boleto = $colectivo->pagarCon($tarjeta);
 
-        try {
-            $tarjeta->cargarSaldo(100);
-            $boleto = $colectivo->pagarCon($tarjeta);
-            echo "Se ha pagado un pasaje. Monto: {$boleto->getMonto()}, Saldo restante: {$boleto->getSaldoRestante()}\n";
-        } catch (Exception $e) {
-            echo "Error al pagar el pasaje: {$e->getMessage()}\n";
-        }
+        $this->assertInstanceOf(Boleto::class, $boleto); // Verificamos que se haya generado un boleto
+        $this->assertEquals(120, $boleto->getMonto()); // Verificamos el monto del boleto
+        $this->assertEquals(30, $boleto->getSaldoRestante()); // Verificamos el saldo restante en la tarjeta
+        $this->assertEquals(30, $tarjeta->getSaldo()); // Verificamos que el saldo de la tarjeta se haya actualizado
     }
 
-    // Test de la clase Boleto
-    function testBoleto()
+    public function testPagarConSaldoInsuficiente()
     {
-        $boleto = new Boleto(120, 380);
+        $tarjeta = new Tarjeta(100); // Creamos una tarjeta con saldo de 100
+        $colectivo = new Colectivo();
 
-        echo "Monto del boleto: {$boleto->getMonto()}\n";
-        echo "Saldo restante: {$boleto->getSaldoRestante()}\n";
+        $this->expectException(Exception::class); // Esperamos una excepción
+        $colectivo->pagarCon($tarjeta);
     }
 }
+
+
+?>

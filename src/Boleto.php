@@ -1,5 +1,7 @@
 <?php
 namespace TrabajoSube;
+use Exception;
+
 
 class Boleto
 {

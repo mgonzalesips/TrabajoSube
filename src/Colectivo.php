@@ -1,5 +1,6 @@
 <?php
 namespace TrabajoSube;
+use Exception;
 
 class Colectivo
 {
