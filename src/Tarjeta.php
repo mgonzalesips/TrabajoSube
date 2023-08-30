@@ -30,10 +30,14 @@ class Tarjeta {
 
     public function cargarSaldo($monto) {
         if ($this->verifyMonto($monto)) {
-            $this->saldo = min(($this->saldo + $monto), $this->limiteSaldo);
+            $this->descontarSaldo($monto);
             return true;
         }
         return false;
+    }
+
+    public function descontarSaldo($montoDescontar) {
+        $this->saldo -= $montoDescontar;
     }
 }
 

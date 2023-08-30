@@ -5,24 +5,18 @@ use Exception;
 
 class Boleto
 {
-    private $monto;
+    private $tarifa;
     private $saldoRestante;
-
-    public function __construct($monto, $saldoRestante)
+    public function __construct($saldoInicial, $tarifa) {
+        $this->saldoRestante = $saldoInicial - $tarifa;
+        $this->tarifa = $tarifa;
+    }
+    public function getTarifa()
     {
-        $this->monto = $monto;
-        $this->saldoRestante = $saldoRestante;
+        return $this->tarifa;
     }
 
-    public function getMonto()
-    {
-        return $this->monto;
-    }
-
-    public function getSaldoRestante()
-    {
-        return $this->saldoRestante;
-    }
+    
 }
 
 
