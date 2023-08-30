@@ -5,9 +5,8 @@ class Colectivo {
     public $linea;
     public $empresa;
 
-    public function __construct($linea, $empresa) {
+    public function __construct($linea) {
         $this->linea = $linea;
-        $this->empresa = $empresa;
     }
 
     public function pagarCon($tarjeta) {

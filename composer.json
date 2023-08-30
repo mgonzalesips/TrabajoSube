@@ -1,11 +1,11 @@
 {
-    "name": "phpunit/trabajosube",
+"name": "phpunit/trabajosube",
 "description": "Trabajo practico AAT",
 "license": "MIT",
 
 "scripts": {   		
 "test" : "./vendor/bin/phpunit --coverage-text"		
-}
+},
 
     "autoload":{
         "psr-4": {
