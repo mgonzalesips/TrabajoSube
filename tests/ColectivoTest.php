@@ -12,12 +12,15 @@ class ColectivoTest extends TestCase {
     }
 
     public function testComprarTarjeta() {
+        // Crear el objeto necesario para la prueba
+        $colectivo = new Colectivo('Linea 1');
         $tarjeta = new Tarjeta();
-        $montoPagado = $tarjeta->getMontoPagado();
-        $saldo = $tarjeta->getSaldo();
-
-        // Agregar aserciones para verificar los valores de $montoPagado y $saldo si es necesario
-        // Ejemplo: $this->assertEquals(0, $montoPagado);
-        //          $this->assertEquals(100, $saldo);
+    
+        // Realizar la acción que se está probando
+        $boleto = $colectivo->pagarCon($tarjeta);
+    
+        // Realizar una aserción para verificar el resultado
+        $this->assertInstanceOf(Boleto::class, $boleto);
     }
+    
 }

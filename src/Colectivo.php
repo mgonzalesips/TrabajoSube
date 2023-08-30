@@ -13,5 +13,9 @@ class Colectivo {
         $tarjeta->pagarPasaje(120);
         return new Boleto($this, $tarjeta);
     }
+
+    public function getLinea() {
+        return $this->linea;
+    }
 }
 ?>
