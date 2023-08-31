@@ -16,6 +16,11 @@ class Boleto
         return $this->tarifa;
     }
 
+    public function getSaldoRestante()
+    {
+        return $this->saldoRestante;
+    }
+
     
 }
 

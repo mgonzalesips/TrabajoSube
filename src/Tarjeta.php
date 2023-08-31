@@ -30,7 +30,7 @@ class Tarjeta {
 
     public function cargarSaldo($monto) {
         if ($this->verifyMonto($monto)) {
-            $this->descontarSaldo($monto);
+            $this->saldo += $monto;
             return true;
         }
         return false;
@@ -40,10 +40,5 @@ class Tarjeta {
         $this->saldo -= $montoDescontar;
     }
 }
-
-$tarjetaRenaudo = new Tarjeta;
-$tarjetaRenaudo ->cargarSaldo(1000);
-$tarjetaRenaudo ->cargarSaldo(150);
-echo $tarjetaRenaudo->getSaldo();
 
 ?>
