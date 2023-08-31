@@ -20,25 +20,31 @@ class Tarjeta {
     }
 
     public function verifyMonto($monto){
-        foreach ($this->cargasPosibles as $montosValidos) {
-            if($montosValidos == $monto){
-                return true;
+        if (($this->getSaldo() + $monto) <= 6600) {
+            foreach ($this->cargasPosibles as $montosValidos) {
+                if($montosValidos == $monto){
+                    return true;
+                }
+                else {
+                }
             }
-          }
-        
+        }
+        else{
+            false;
+        }
     }
 
     public function cargarSaldo($monto) {
         if ($this->verifyMonto($monto)) {
             $this->saldo += $monto;
-            return true;
         }
-        return false;
+        else{
+            echo "No se puede cargar saldo";
+        }
     }
 
     public function descontarSaldo($montoDescontar) {
         $this->saldo -= $montoDescontar;
     }
 }
-
 ?>
