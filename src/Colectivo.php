@@ -13,7 +13,7 @@ class Colectivo{
     }
 
     public function getLinea(){
-        $this->linea;
+        return $this->linea;
     }
 
     public function pagarCon($tarjeta){
