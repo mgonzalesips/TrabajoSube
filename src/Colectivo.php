@@ -1,14 +1,23 @@
 <?php
 namespace TrabajoSube;
+
+include "Boleto.php";
+include "Tarjeta.php";
+
 class Colectivo{
-    protected $linea;
-    
+    public $linea;
+    public $costo = 120;
+
     public function __construct($linea){
         $this->linea = $linea;
     }
-    
-    //    Funcion de ejemplo para test
+
     public function getLinea(){
-        return $this->linea;
+        $this->linea;
+    }
+
+    public function pagarCon($tarjeta){
+        $tarjeta->pagarBoleto($this->costo);
+        return $boleto = new Boleto($this->costo, $tarjeta->saldo, $this->linea);
     }
 }
