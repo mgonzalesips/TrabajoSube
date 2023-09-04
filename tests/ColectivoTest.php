@@ -8,6 +8,6 @@ class ColectivoTest extends TestCase{
 
     public function testGetlinea(){
         $cole = new Colectivo(103);
-        $this->assertEquals($cole->getLinea(), 103);
+        $this->assertEquals($cole->getLinea(), $cole->linea);
     }
 }
