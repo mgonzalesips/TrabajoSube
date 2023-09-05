@@ -5,6 +5,7 @@ use PHPUnit\Framework\TestCase;
 
 class TarjetaViajePlusTest extends TestCase {
     public function testDosViajesPlus() {
+        //creo una tarjeta nueva(comienza con el saldo en 0, es decir va a tener dos viajes plus)
         $tarjeta = new Tarjeta();
 
         //pago 2 pasajes con saldo en 0 y verifico que ambos se pagan con el viaje plus
@@ -13,8 +14,9 @@ class TarjetaViajePlusTest extends TestCase {
         $this->assertEquals($tarjeta->getSaldo(), -120);
         $tarjeta->pagarPasaje();
         $this->assertEquals($tarjeta->getSaldo(), -240);
+        //agote los saldos plus que tenia dispolibles (2)
         
-        //intento pagar el tercero con ya dos viajes plus en negativo y no me deja 
+        //intento pagar el tercero, ya con dos viajes plus en negativo y verifico que no me deja 
 
         $this->expectException(\Exception::class);
         $tarjeta->pagarPasaje();

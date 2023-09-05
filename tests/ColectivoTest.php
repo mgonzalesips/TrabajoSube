@@ -9,17 +9,18 @@ class ColectivoTest extends TestCase {
     public function testGetLinea() {
         $cole = new Colectivo(103);
         $this->assertEquals($cole->getLinea(), 103);
+        // verificamos que al crear un nuevo constructor y pasarle como argumento 103 (la linea), despues obtengamos el mismo valor al solicitar la linea
     }
 
     public function testComprarTarjeta() {
-        // Crear el objeto necesario para la prueba
+        // creamos una nueva clase de colectivo y le asignamos la linea 1
         $colectivo = new Colectivo('Linea 1');
+        // creamos una nueva tarjeta
         $tarjeta = new Tarjeta();
     
-        // Realizar la acción que se está probando
+        //creamos una variable boleto 
         $boleto = $colectivo->pagarCon($tarjeta);
     
-        // Realizar una aserción para verificar el resultado
         $this->assertInstanceOf(Boleto::class, $boleto);
     }
 
