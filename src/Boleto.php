@@ -1,5 +1,6 @@
 <?php
 namespace TrabajoSube;
+//h0la
 
 class Boleto{
     public $costo;
