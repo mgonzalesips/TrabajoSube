@@ -60,7 +60,7 @@ IMPORTANTE: Como punto de control, alguna de estas dos funcionalidades: "Viaje p
 ## Viaje plus
 - Si la tarjeta se queda sin crédito, puede tener un saldo negativo de hasta $211,84.
 - Cuando se vuelve a cargar la tarjeta, se descuenta el saldo de lo que se haya consumido en concepto de viaje plus.
-- Escribir un test que valide que se pueden dar hasta dos viajes plus.
+- Escribir un test que valide que la tarjeta no pueda quedar con menos saldo que el permitido.
 - Escribir un test que valide que el saldo de la tarjeta descuenta correctamente el/los viaje/s plus otorgado/s.
 
 ## Franquicia de Boleto.
