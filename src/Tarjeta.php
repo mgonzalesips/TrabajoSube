@@ -30,8 +30,9 @@ class Tarjeta {
             $this->saldo -= self::TARIFA;
             $this->montoPagado = self::TARIFA;
             return true;
+        }else {
+            $this->realizarViajePlus();
         }
-        return false;
     }
 
     public function getMontoPagado() {
@@ -41,6 +42,18 @@ class Tarjeta {
     public function getSaldo() {
         return $this->saldo;
     }
+
+    public function realizarViajePlus() {
+        if ($this->saldo <= 120) {
+            if(($this->saldo - 120) >= (-240)){
+                $this->saldo -= 120;
+            }
+            else {
+                throw new \Exception("Saldo insuficiente para realizar un viaje plus.");
+            }
+        }
+    }
+
 }
 
 /*$tarjeberp = new Tarjeta();
