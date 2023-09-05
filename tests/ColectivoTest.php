@@ -1,6 +1,5 @@
 <?php
-
-namespace TrabajoSube;
+namespace TrabajoSube\Tests;
 
 use PHPUnit\Framework\TestCase;
 use TrabajoSube\Colectivo;
@@ -12,27 +11,42 @@ class ColectivoTest extends TestCase
 {
     public function testPagarConSaldoSuficiente()
     {
-        $tarjeta = new Tarjeta(150);
         $colectivo = new Colectivo();
+        $tarjeta = new Tarjeta(200);
 
         $boleto = $colectivo->pagarCon($tarjeta);
 
         $this->assertInstanceOf(Boleto::class, $boleto);
+    }
+
+    public function testGetTarifa()
+    {
+        $colectivo = new Colectivo();
+        $tarjeta = new Tarjeta(200);
+
+        $boleto = $colectivo->pagarCon($tarjeta);
+
         $this->assertEquals(120, $boleto->getTarifa());
-        $this->assertEquals(30, $boleto->getSaldoRestante());
-        $this->assertEquals(30, $tarjeta->getSaldo());
+    }
+
+    public function testGetSaldo()
+    {
+        $colectivo = new Colectivo();
+        $tarjeta = new Tarjeta(200);
+
+        $boleto = $colectivo->pagarCon($tarjeta);
+
+        $this->assertEquals(80, $tarjeta->getSaldo());
     }
 
     public function testPagarConSaldoInsuficiente()
     {
-        $tarjeta = new Tarjeta(100);
         $colectivo = new Colectivo();
+        $tarjeta = new Tarjeta(50);
 
         $this->expectException(Exception::class);
+        $this->expectExceptionMessage("Saldo insuficiente para pagar el pasaje.");
+
         $colectivo->pagarCon($tarjeta);
     }
-
 }
-
-
-?>

@@ -1,15 +1,12 @@
 <?php
 namespace TrabajoSube;
+
 use Exception;
 use TrabajoSube\Boleto;
 
 class Colectivo
 {
     private $tarifa = 120;
-    
-    public function cambiarTarifa($valor){
-        $this->tarifa = $valor;
-    }
 
     public function pagarCon(Tarjeta $tarjeta)
     {
