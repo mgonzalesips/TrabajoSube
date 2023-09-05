@@ -18,11 +18,11 @@ class TarjetaTest extends TestCase {
      * @dataProvider tarjetaProvider
      */
 
-    public function testPagarBoleto($saldoini, $carga, $expected) 
+    public function testPagarBoleto($saldoini, $carga, $totalExpected, $restanteExpected) 
     {
         $this->tarjeta->saldo = $saldoini;
         $costoBoleto = 120;
-        $this->assertEquals($saldoini-$costoBoleto, $this->tarjeta->pagarBoleto($costoBoleto));
+        $this->assertEquals($restanteExpected, $this->tarjeta->pagarBoleto($costoBoleto));
     }
 
     /**
@@ -35,11 +35,13 @@ class TarjetaTest extends TestCase {
     }
     
     public static function tarjetaProvider(){
+        //Saldo, Carga, Saldo+Carga, Saldo-Boleto
         return [
-            [1000, 4000, 5000],
-            [5000, 2000, -1],
-            [6450, 150, 6600],
-            'Caso Limite' => [6600, 150, -1]
+            [1000, 4000, 5000, 880],
+            [5000, 2000, -1, 4880],
+            [6450, 150, 6600, 6330],
+            'Caso limite carga' => [6600, 150, -1, 6480],
+            'Caso limite pago' => [110, 150, 260, -1]
         ];
     }
 

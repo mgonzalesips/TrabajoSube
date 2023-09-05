@@ -21,7 +21,10 @@ class Tarjeta{
     }
 
     public function pagarBoleto($costo){
-       return $this->saldo -= $costo;
+        if($this->saldo >= $costo)
+            return $this->saldo -= $costo;
+        else 
+            return -1;
     }
 
     public function cargarDinero($monto){
