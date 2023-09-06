@@ -1,14 +1,19 @@
 <?php
+
 namespace TrabajoSube;
+
 class Colectivo{
-    protected $linea;
-    
-    public function __construct($linea){
-        $this->linea = $linea;
+
+    private $saldoMin = 0;
+    private $costePasaje = 120;
+
+    public function pagarCon($tarjeta){
+        if (($tarjeta->saldo - $costePasaje) >= 0){
+            $tarjeta->saldo = $tarjeta->saldo - $costePasaje;
+        }
+        else{
+            echo 'Saldo insuficiente';
+        }
     }
-    
-    //    Funcion de ejemplo para test
-    public function getLinea(){
-        return $this->linea;
-    }
+
 }
