@@ -18,6 +18,7 @@ class Colectivo
             throw new Exception("Saldo insuficiente para pagar el pasaje.");
         }
     }
+
 }
 
 ?>

@@ -25,16 +25,17 @@ class Tarjeta
 
     public function verifyMonto($monto)
     {
-        if (($this->getSaldo() + $monto) <= 6600) {
+        if (($this->saldo + $monto) <= 6600) {
             foreach ($this->cargasPosibles as $montosValidos) {
                 if ($montosValidos == $monto) {
+                    echo "Exito";
                     return true;
-                } else {
-                    false;
                 }
             }
+            return false;
         } else {
-            false;
+            echo "Supera el limite";
+            return false;
         }
     }
 
@@ -49,7 +50,12 @@ class Tarjeta
 
     public function descontarSaldo($montoDescontar)
     {
-        $this->saldo -= $montoDescontar;
+        if ($this->saldo - $montoDescontar < 0) {
+            $this->saldo = 0;
+        } else {
+            $this->saldo -= $montoDescontar;
+        }
     }
+
 }
 ?>
