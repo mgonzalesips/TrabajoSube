@@ -26,6 +26,36 @@ class ColectivoTest extends TestCase {
         $this->assertInstanceOf(Boleto::class, $boleto);
     }
     
+    public function testPagarConTarjetaConSaldoSuficiente() {
+        $colectivo = new Colectivo('Linea 1');
+        $tarjeta = new Tarjeta();
+        $fecha = '1.1.1';
+    
+        // Cargamos saldo suficiente para pagar un pasaje
+        $tarjeta->cargarSaldo(Tarjeta::TARIFA);
+    
+        $boleto = $colectivo->pagarCon($tarjeta, $fecha);
+    
+        $this->assertInstanceOf(Boleto::class, $boleto);
+        $this->assertInstanceOf(Colectivo::class, $boleto->getColectivo());
+        $this->assertInstanceOf(Tarjeta::class, $boleto->getTarjeta());
+        $this->assertEquals($boleto->getFecha(), '1.1.1');
+    }
+    
+    public function testPagarConTarjetaSinSaldoSuficiente() {
+        $colectivo = new Colectivo('Linea 1');
+        $tarjeta = new Tarjeta();
+        $fecha = '1.1.1';
+    
+        // Intentamos pagar un pasaje sin cargar saldo
+        $boleto = $colectivo->pagarCon($tarjeta, $fecha);
+    
+        $this->assertInstanceOf(Boleto::class, $boleto);
+        $this->assertInstanceOf(Colectivo::class, $boleto->getColectivo());
+        $this->assertInstanceOf(Tarjeta::class, $boleto->getTarjeta());
+        $this->assertEquals($boleto->getFecha(), '1.1.1');
+    }
+    
 
     public function testearBoleto() {
         $colectivo = 115;
