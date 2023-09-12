@@ -86,5 +86,30 @@ class ColectivoTest extends TestCase {
             $this->assertEquals($tarjeta->saldo, $carga);
         }
     }
+    public function testCargarSaldoValido() {
+        $tarjeta = new Tarjeta();
+    
+        // Intenta cargar un saldo válido (150)
+        $result = $tarjeta->cargarSaldo(150);
+    
+        // Verifica que la carga se realice correctamente
+        $this->assertTrue($result);
+    
+        // Verifica que el saldo después de la carga sea correcto
+        $this->assertEquals($tarjeta->getSaldo(), 150);
+    }
+    
+    public function testCargarSaldoInvalido() {
+        $tarjeta = new Tarjeta();
+    
+        // Intenta cargar un saldo inválido (100, que no está en la lista de cargas válidas)
+        $result = $tarjeta->cargarSaldo(100);
+    
+        // Verifica que la carga no se realice correctamente
+        $this->assertFalse($result);
+    
+        // Verifica que el saldo no cambie después de una carga inválida
+        $this->assertEquals($tarjeta->getSaldo(), 0);
+    }
     
 }
