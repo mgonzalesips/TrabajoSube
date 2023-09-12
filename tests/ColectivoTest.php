@@ -87,29 +87,48 @@ class ColectivoTest extends TestCase {
         }
     }
     public function testCargarSaldoValido() {
-        $tarjeta = new Tarjeta();
-    
-        // Intenta cargar un saldo válido (150)
-        $result = $tarjeta->cargarSaldo(150);
-    
-        // Verifica que la carga se realice correctamente
-        $this->assertTrue($result);
-    
-        // Verifica que el saldo después de la carga sea correcto
-        $this->assertEquals($tarjeta->getSaldo(), 150);
-    }
-    
-    public function testCargarSaldoInvalido() {
-        $tarjeta = new Tarjeta();
-    
-        // Intenta cargar un saldo inválido (100, que no está en la lista de cargas válidas)
-        $result = $tarjeta->cargarSaldo(100);
-    
-        // Verifica que la carga no se realice correctamente
-        $this->assertFalse($result);
-    
-        // Verifica que el saldo no cambie después de una carga inválida
-        $this->assertEquals($tarjeta->getSaldo(), 0);
-    }
-    
+    $tarjeta = new Tarjeta();
+
+    // Intenta cargar un saldo válido (150)
+    $result = $tarjeta->cargarSaldo(150);
+
+    // Verifica que la carga se realice correctamente
+    $this->assertTrue($result);
+
+    // Verifica que el saldo después de la carga sea correcto
+    $this->assertEquals($tarjeta->getSaldo(), 150);
+}
+
+public function testCargarSaldoInvalido() {
+    $tarjeta = new Tarjeta();
+
+    // Intenta cargar un saldo inválido (100, que no está en la lista de cargas válidas)
+    $result = $tarjeta->cargarSaldo(100);
+
+    // Verifica que la carga no se realice correctamente
+    $this->assertFalse($result);
+
+    // Verifica que el saldo no cambie después de una carga inválida
+    $this->assertEquals($tarjeta->getSaldo(), 0);
+}
+
+public function testDescuentoPasaje() {
+    $colectivo = new Colectivo('Linea 1');
+    $tarjeta = new Tarjeta();
+    $fecha = '1.1.1';
+
+    // Cargamos saldo suficiente para pagar un pasaje
+    $tarjeta->cargarSaldo(150);
+
+    // Pagamos un pasaje
+    $boleto = $colectivo->pagarCon($tarjeta, $fecha);
+
+    // Verificamos que se descuente el monto del pasaje del saldo de la tarjeta
+    $this->assertEquals($tarjeta->getSaldo(), 30);
+
+    // Verificamos que el monto pagado en el boleto sea igual a la tarifa
+    $this->assertEquals($tarjeta->getMontoPagado(), 120);
+}
+
+
 }

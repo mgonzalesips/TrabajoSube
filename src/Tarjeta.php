@@ -3,7 +3,6 @@ namespace TrabajoSube;
 
 class Tarjeta {
     public $saldo;
-    public $montoPagado;
 
     const TARIFA = 120;
     const CARGAS_VALIDAS = [150, 200, 250, 300, 350, 400, 450, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 2000, 2500, 3000, 3500, 4000];
