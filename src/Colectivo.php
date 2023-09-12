@@ -17,10 +17,16 @@ class Colectivo{
     }
 
     public function pagarCon($tarjeta){
-        if ($tarjeta->saldo >= $costo){
-            $tarjeta->saldo -= $costo;
-            return $boleto = new Boleto($this->costo, $tarjeta->saldo, $this->linea);
+        $nuevosaldo = $tarjeta->saldo - $this->costo;
+        if ($tarjeta->saldo >= ~$this->costo && $nuevosaldo >= $tarjeta->minsaldo ){
+            $tarjeta->saldo = $nuevosaldo;
+            echo "Saldo restante: " + $tarjeta->saldo;
+            return new Boleto($this->costo, $tarjeta->saldo, $this->linea);
         }
-        return -1;
+        else{
+            echo "Saldo insuficiente"; 
+            return false;
+        }
     }
+
 }
