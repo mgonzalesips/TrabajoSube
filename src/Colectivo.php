@@ -17,7 +17,10 @@ class Colectivo{
     }
 
     public function pagarCon($tarjeta){
-        $tarjeta->pagarBoleto($this->costo);
-        return $boleto = new Boleto($this->costo, $tarjeta->saldo, $this->linea);
+        if ($tarjeta->saldo >= $costo){
+            $tarjeta->saldo -= $costo;
+            return $boleto = new Boleto($this->costo, $tarjeta->saldo, $this->linea);
+        }
+        return -1;
     }
 }

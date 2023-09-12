@@ -20,13 +20,6 @@ class Tarjeta{
         $this->saldo = 0;
     }
 
-    public function pagarBoleto($costo){
-        if($this->saldo >= $costo)
-            return $this->saldo -= $costo;
-        else 
-            return -1;
-    }
-
     public function cargarDinero($monto){
         $nuevosaldo = $this->saldo + $monto;
         if(chequeoCarga($monto) && $nuevosaldo <= 6600)

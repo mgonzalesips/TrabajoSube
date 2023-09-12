@@ -17,17 +17,6 @@ class TarjetaTest extends TestCase {
     /**
      * @dataProvider tarjetaProvider
      */
-
-    public function testPagarBoleto($saldoini, $carga, $totalExpected, $restanteExpected) 
-    {
-        $this->tarjeta->saldo = $saldoini;
-        $costoBoleto = 120;
-        $this->assertEquals($restanteExpected, $this->tarjeta->pagarBoleto($costoBoleto));
-    }
-
-    /**
-     * @dataProvider tarjetaProvider
-     */
     public function testCargarDinero($saldo, $carga, $expected)
     {
         $this->tarjeta->saldo = $saldo;
