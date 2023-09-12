@@ -19,7 +19,9 @@ class TarjetaViajePlusTest extends TestCase {
         //intento pagar el tercero, ya con dos viajes plus en negativo y verifico que no me deja 
 
         $this->expectException(\Exception::class);
-        $tarjeta->pagarPasaje();
+        $this->expectExceptionMessage("Saldo insuficiente para realizar un viaje plus.");
+
+        $tarjeta->realizarViajePlus();
     }
     /*
     public function testDescuentoViajePlus() {
