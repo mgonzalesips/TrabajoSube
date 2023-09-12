@@ -56,7 +56,7 @@ class Tarjeta {
 
 }
 
-/*$tarjeberp = new Tarjeta();
+$tarjeberp = new Tarjeta();
 
 $montoCarga = 200; 
 $resultadoCarga = $tarjeberp->cargarSaldo($montoCarga);
@@ -70,7 +70,7 @@ if ($resultadoCarga) {
 $tarjeberp->pagarPasaje();
 echo "\n el saldo es: $" . $tarjeberp->getSaldo();
 echo "\n el monto pagado es: $" . $tarjeberp->getMontoPagado();
-*/
+
 ?>
 
 
