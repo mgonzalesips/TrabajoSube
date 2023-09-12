@@ -9,9 +9,10 @@ class Colectivo {
         $this->linea = $linea;
     }
 
-    public function pagarCon($tarjeta) {
+    public function pagarCon($tarjeta,$fecha) {
+        //$fecha = '24.11.23';
         $tarjeta->pagarPasaje(120);
-        return new Boleto($this, $tarjeta);
+        return new Boleto($this, $tarjeta, $fecha);
     }
 
     public function getLinea() {

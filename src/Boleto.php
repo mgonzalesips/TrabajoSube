@@ -6,21 +6,21 @@ class Boleto {
     public $tarjeta;
     public $fecha;
 
-    public function __construct($colectivo, $tarjeta) {
+    public function __construct($colectivo,$tarjeta,$fecha) {
         $this->colectivo = $colectivo;
         $this->tarjeta = $tarjeta;
-        $this->fecha = date("Y-m-d H:i:s");
+        $this->fecha = $fecha;
     }
 
-    public function obtenerColectivo(){
+    public function getColectivo(){
         return $this->colectivo;
     }
 
-    public function obtenerTarjeta(){
+    public function getTarjeta(){
         return $this->tarjeta;
     }
 
-    public function obtenerFecha(){
+    public function getFecha(){
         return $this->fecha;
     }
 
