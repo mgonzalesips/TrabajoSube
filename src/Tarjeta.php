@@ -10,14 +10,14 @@ class Tarjeta{
 
     public function cargaTarjeta($tarjeta, $carga){
 
-        if(($tarjeta->saldo + $carga) > $saldMax){
+        if(($tarjeta->saldo + $carga) > $saldoMax){
             echo 'Te pasaste del saldo maximo (6600)';
         }
-        else if(!(($carga >= 150 and $carga <= 500 and $carga % 50) or ($carga >= 600 and $carga <= 1500 and $carga % 100) or ($carga >= 2000 and $carga <= 4000 and $carga % 500))){
-            echo 'Valor de carga invalido. Los valores validos son 150, 200, 250, 300, 350, 400, 450, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 2000, 2500, 3000, 3500, 4000';
+        else if(!(($carga >= 150 and $carga <= 500 and ($carga % 50) == 0) or ($carga >= 600 and $carga <= 1500 and ($carga % 100) == 0) or ($carga >= 2000 and $carga <= 4000 and ($carga % 500) == 0))){
+            echo 'Valor de carga invalido. Los valores validos son: 150, 200, 250, 300, 350, 400, 450, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 2000, 2500, 3000, 3500 o 4000';
         }
         else{
-            return $tarjeta->saldo + $carga;
+            $tarjeta->saldo = $tarjeta->saldo + $carga;
         }
     }
 
