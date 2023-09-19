@@ -24,7 +24,7 @@ class Tarjeta{
     public function cargarDinero($monto){
         $nuevosaldo = $this->saldo + $monto;
         if(chequeoCarga($monto) && $nuevosaldo <= $this->maxsaldo){
-            echo "Saldo actual: " + $nuevosaldo;
+            echo "Saldo actual: " . strval($nuevosaldo);
             return $nuevosaldo;
         }
             

@@ -20,7 +20,7 @@ class Colectivo{
         $nuevosaldo = $tarjeta->saldo - $this->costo;
         if ($tarjeta->saldo >= ~$this->costo && $nuevosaldo >= $tarjeta->minsaldo ){
             $tarjeta->saldo = $nuevosaldo;
-            echo "Saldo restante: " + $tarjeta->saldo;
+            echo "Saldo restante: " . strval($tarjeta->saldo);
             return new Boleto($this->costo, $tarjeta->saldo, $this->linea);
         }
         else{
