@@ -24,12 +24,12 @@ class Tarjeta{
     public function cargarDinero($monto){
         $nuevosaldo = $this->saldo + $monto;
         if(chequeoCarga($monto) && $nuevosaldo <= $this->maxsaldo){
-            echo "Saldo actual: " . strval($nuevosaldo);
+            echo "Saldo actual: " . strval($nuevosaldo) . "\n";
             return $nuevosaldo;
         }
             
         else{
-            echo "Error en la carga";
+            echo "Error en la carga\n";
             return false;
         } 
     }

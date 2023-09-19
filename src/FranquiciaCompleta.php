@@ -5,5 +5,5 @@ namespace TrabajoSube;
 include "Boleto.php";
 include "Tarjeta.php";
 
-class FranquiciaParcial implements Tarjeta{
+class FranquiciaCompleta implements Tarjeta{
 }

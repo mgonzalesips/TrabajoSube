@@ -24,7 +24,7 @@ class Colectivo{
             return new Boleto($this->costo, $tarjeta->saldo, $this->linea);
         }
         else{
-            echo "Saldo insuficiente"; 
+            echo "Saldo insuficiente\n"; 
             return false;
         }
     }
