@@ -25,13 +25,15 @@ class Tarjeta {
     }
 
     public function pagarPasaje() {
-        if ($this->saldo >= self::TARIFA) {
+        /*if ($this->saldo >= self::TARIFA) {
             $this->saldo -= self::TARIFA;
             $this->montoPagado = self::TARIFA;
             return true;
         }else {
             $this->realizarViajePlus();
-        }
+        }*/
+        $this->montoPagado += self::TARIFA;
+        $this->saldo -= self::TARIFA;
     }
 
     public function getMontoPagado() {
@@ -43,18 +45,19 @@ class Tarjeta {
     }
 
     public function realizarViajePlus() {
-        if ($this->saldo <= 120) {
+        /*if ($this->saldo <= 120) {
             if(($this->saldo - 120) >= (-240)){
                 $this->saldo -= 120;
             }
             else {
                 throw new \Exception("Saldo insuficiente para realizar un viaje plus.");
             }
-        }
+        }*/
+        $this->saldo -= self::TARIFA;
     }
 
 }
-
+/*
 $tarjeberp = new Tarjeta();
 
 $montoCarga = 200; 
@@ -69,7 +72,7 @@ if ($resultadoCarga) {
 $tarjeberp->pagarPasaje();
 echo "\n el saldo es: $" . $tarjeberp->getSaldo();
 echo "\n el monto pagado es: $" . $tarjeberp->getMontoPagado();
-
+*/
 ?>
 
 
