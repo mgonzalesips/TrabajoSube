@@ -1,9 +1,6 @@
 <?php
 namespace TrabajoSube;
 
-include "Boleto.php";
-include "Tarjeta.php";
-
 class Colectivo{
     public $linea;
     public $costo = 120;
