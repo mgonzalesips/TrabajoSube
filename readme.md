@@ -121,7 +121,7 @@ En nuestra ciudad existen diversas líneas de colectivo. Algunas solo viajan den
 
 Las líneas de colectivo interurbanas admiten todas las franquicias y siguen los mismos criterios que las líneas de colectivo urbanas.
 
-## Entrega (17/8).
+## Entrega (17/10).
 En la fecha pactada comenzará la defensa y devolución del trabajo realizado. Para la entrega se pide y se va a considerar:
 
 - Todas las iteraciones completas.
