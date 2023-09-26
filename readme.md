@@ -99,8 +99,7 @@ Al utilizar una tarjeta de tipo boleto educativo gratuito se pueden realizar has
 Las tarjetas SUBE cuentan con el boleto de uso frecuente. Este es un beneficio que aplica un descuento al monto del boleto dependiendo de cuántos viajes se hagan.
 - Del viaje 1 al 29: Tarifa normal.
 - Del viaje 30 al 79: 20% de descuento.
-- Del viaje 79 al 80: 25% de descuento.
-- Del viaje 81 en adelante: Tarifa normal.
+- Del viaje 80 en adelante: 25% de descuento.
 
 La cantidad de viajes se cuenta del 1 al 30 de cada mes. Este beneficio se aplicará *sólo* sobre las tarjetas normales.
 Implementar esta nueva funcionalidad.
