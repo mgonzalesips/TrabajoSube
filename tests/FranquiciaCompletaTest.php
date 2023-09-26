@@ -6,24 +6,13 @@ use PHPUnit\Framework\TestCase;
 
 class FranquiciaCompletaTest extends TestCase
 {
-    public function testSaldoInicial()
+    public function testInicializacion()
     {
         $franquicia = new FranquiciaCompleta();
 
         $this->assertEquals(0, $franquicia->saldo);
-    }
-
-    public function testMinSaldo()
-    {
-        $franquicia = new FranquiciaCompleta();
-
         $this->assertEquals(~211.84, $franquicia->minsaldo);
-    }
-
-    public function testMaxSaldo()
-    {
-        $franquicia = new FranquiciaCompleta();
-        
         $this->assertEquals(6600, $franquicia->maxsaldo);
     }
 }
+

@@ -2,5 +2,9 @@
 
 namespace TrabajoSube;
 
-class FranquiciaParcial implements Tarjeta{
+class FranquiciaParcial extends Tarjeta{
+    public function __construct(){
+        Tarjeta::__construct();
+    }
+
 }

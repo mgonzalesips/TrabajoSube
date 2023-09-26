@@ -2,5 +2,8 @@
 
 namespace TrabajoSube;
 
-class FranquiciaCompleta implements Tarjeta{
+class FranquiciaCompleta extends Tarjeta{
+    public function __construct(){
+        Tarjeta::__construct();
+    }
 }

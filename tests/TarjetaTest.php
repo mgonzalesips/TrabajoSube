@@ -24,7 +24,7 @@ class TarjetaTest extends TestCase {
     }
     
     public static function tarjetaProvider(){
-        //Saldo, Carga, Saldo+Carga, Saldo-Boleto
+        //Saldo, Carga, Saldo+Carga
         return [
             [1000, 4000, 5000],
             [5000, 2000, false],
