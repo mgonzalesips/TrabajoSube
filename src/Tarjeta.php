@@ -8,11 +8,12 @@ class Tarjeta{
     private $saldoMax = 6600;
 
     public function __construct($saldo){
+        $this->saldo = $saldo;
     }
 
-    public function cargaTarjeta($tarjeta, $carga){
+    public function cargaTarjeta($this, $carga){
 
-        if(($tarjeta->saldo + $carga) > $saldoMax){
+        if(($this->saldo + $carga) > $this->saldoMax){
             echo 'Te pasaste del saldo maximo (6600)';
         }
         else if(!(($carga >= 150 and $carga <= 500 and ($carga % 50) == 0) or ($carga >= 600 and $carga <= 1500 and ($carga % 100) == 0) or ($carga >= 2000 and $carga <= 4000 and ($carga % 500) == 0))){
