@@ -5,12 +5,12 @@ namespace TrabajoSube;
 class Boleto{
 
     private function generarBoleto($tarjeta){
-        private $texto = "Pago exitoso. Saldo restante: " . $tarjeta->saldo;
+        $texto = "Pago exitoso. Saldo restante: " . $tarjeta->saldo;
         return $texto;
     }
 
     public function imprimirBoleto($tarjeta){
-        echo generarTexto($tarjeta);
+        echo $this->generarBoleto($tarjeta);
     }
 
     public function saldoIns(){
