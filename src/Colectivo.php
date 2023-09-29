@@ -10,7 +10,7 @@ class Colectivo{
     public function pagarCon($tarjeta){
         if (($tarjeta->saldo - $this->costePasaje) >= 0){
             $tarjeta->saldo = $tarjeta->saldo - $costePasaje;
-            $boleto->generarBoleto($tarjeta);
+            return $tarjeta->saldo
         }
         else{
             $boleto->saldoIns();
