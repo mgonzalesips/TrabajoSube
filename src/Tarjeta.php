@@ -4,9 +4,11 @@ namespace TrabajoSube;
 
 class Tarjeta{
 
-    public $saldo;
     private $saldoMin = 0;
     private $saldoMax = 6600;
+
+    public function __construct($saldo){
+    }
 
     public function cargaTarjeta($tarjeta, $carga){
 
