@@ -10,8 +10,8 @@ class Boleto{
     }
 
     public function saldoIns(){
-        $texto = "Saldo insuficiente";
-        return $texto;
+        echo 'Saldo insuficiente';
+        return FALSE;
     }
 
 }

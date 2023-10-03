@@ -30,16 +30,16 @@ class ColectivoTest extends TestCase{
         $this->assertEquals($bole->generarBoleto($tarj),"Pago exitoso. Saldo restante: 350");
     }
 
-    public function testpagarCon(){
+    public function testpagarConSaldo(){
         $cole = new Colectivo();
         $tarj = new Tarjeta(470);
         $this->assertEquals($cole->pagarCon($tarj),"Pago exitoso. Saldo restante: 350");
     }
 
-    public function testpagarConIns(){
+    public function testpagarSinSaldo(){
         $cole = new Colectivo();
         $tarj = new Tarjeta(80);
-        $this->assertEquals($cole->pagarCon($tarj),"Saldo insuficiente");
+        $this->assertEquals($cole->pagarCon($tarj),FALSE);
     }
 
 }
