@@ -3,22 +3,22 @@ namespace TrabajoSube;
 
 use Exception;
 use TrabajoSube\Boleto;
+use TrabajoSube\Tarjeta;
 
 class Colectivo
 {
-    private $tarifa = 120;
+    private $tarifa = 180;
+
+    private $saldoMinimo = -211.84;
 
     public function pagarCon(Tarjeta $tarjeta)
     {
-        $saldoAnterior = $tarjeta->getSaldo();
-        if ($saldoAnterior >= $this->tarifa) {
+        if($tarjeta->getSaldo() - $this->tarifa >= $this->saldoMinimo){
             $tarjeta->descontarSaldo($this->tarifa);
-            return new Boleto($saldoAnterior, $this->tarifa);
-        } else {
-            throw new Exception("Saldo insuficiente para pagar el pasaje.");
+            return new Boleto($tarjeta->getSaldo(), $this->tarifa);
+        }else{
+            return false;
         }
     }
-
 }
-
 ?>

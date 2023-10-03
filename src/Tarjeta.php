@@ -8,6 +8,8 @@ class Tarjeta
     private $saldo;
     private $limiteSaldo = 6600;
 
+    private $minSaldo = 211.84;
+
     private $cargasPosibles = array(150, 200, 250, 300, 350, 400, 450, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 2000, 2500, 3000, 3500, 4000);
 
     public function __construct($saldoInicial = 0)
@@ -50,11 +52,7 @@ class Tarjeta
 
     public function descontarSaldo($montoDescontar)
     {
-        if ($this->saldo - $montoDescontar < 0) {
-            $this->saldo = 0;
-        } else {
-            $this->saldo -= $montoDescontar;
-        }
+        $this->saldo -= $montoDescontar;
     }
 
 }

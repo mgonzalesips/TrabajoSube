@@ -35,13 +35,6 @@ class TarjetaTest extends TestCase
         $this->assertEquals(800, $tarjeta->getSaldo());
     }
 
-    public function testDescontarSaldoMayorQueElSaldoActual()
-    {
-        $tarjeta = new Tarjeta(100);
-        $tarjeta->descontarSaldo(200);
-        $this->assertEquals(0, $tarjeta->getSaldo());
-    }
-
     public function testVerifyMontoValido()
     {
         $tarjeta = new Tarjeta(0);

@@ -26,7 +26,7 @@ class ColectivoTest extends TestCase
 
         $boleto = $colectivo->pagarCon($tarjeta);
 
-        $this->assertEquals(120, $boleto->getTarifa());
+        $this->assertEquals(180, $boleto->getTarifa());
     }
 
     public function testGetSaldo()
@@ -36,17 +36,8 @@ class ColectivoTest extends TestCase
 
         $boleto = $colectivo->pagarCon($tarjeta);
 
-        $this->assertEquals(80, $tarjeta->getSaldo());
-    }
-
-    public function testPagarConSaldoInsuficiente()
-    {
-        $colectivo = new Colectivo();
-        $tarjeta = new Tarjeta(50);
-
-        $this->expectException(Exception::class);
-        $this->expectExceptionMessage("Saldo insuficiente para pagar el pasaje.");
-
-        $colectivo->pagarCon($tarjeta);
+        $this->assertEquals(20, $tarjeta->getSaldo());
     }
 }
+
+?>
