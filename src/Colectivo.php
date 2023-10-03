@@ -9,12 +9,12 @@ class Colectivo{
     
     public function pagarCon($tarjeta){
         $boleto = new Boleto();
-        if (($tarjeta->saldo - $this->costePasaje) >= 0){
+        if (($tarjeta->saldo - $this->costePasaje) >= $this->saldoMin){
             $tarjeta->saldo = $tarjeta->saldo - $this->costePasaje;
-            return $tarjeta->saldo;
+            return $boleto->generarBoleto($tarjeta);
         }
         else{
-            $boleto->saldoIns();
+            return $boleto->saldoIns();
         }
     }
 

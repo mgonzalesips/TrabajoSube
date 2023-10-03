@@ -4,17 +4,14 @@ namespace TrabajoSube;
 
 class Boleto{
 
-    private function generarBoleto($tarjeta){
+    public function generarBoleto($tarjeta){
         $texto = "Pago exitoso. Saldo restante: " . $tarjeta->saldo;
         return $texto;
     }
 
-    public function imprimirBoleto($tarjeta){
-        echo $this->generarBoleto($tarjeta);
-    }
-
     public function saldoIns(){
-        echo 'Saldo insuficiente.';
+        $texto = "Saldo insuficiente";
+        return $texto;
     }
 
 }
