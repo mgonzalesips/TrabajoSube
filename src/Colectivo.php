@@ -1,7 +1,10 @@
 <?php
 namespace TrabajoSube;
 
+use function PHPUnit\Framework\assertInstanceOf;
+
 class Colectivo{
+    
     public $linea;
     public $costo = 120;
 
@@ -14,11 +17,19 @@ class Colectivo{
     }
 
     public function pagarCon($tarjeta){
-        $nuevosaldo = $tarjeta->saldo - $this->costo;
-        if ($tarjeta->saldo >= ~$this->costo && $nuevosaldo >= $tarjeta->minsaldo ){
+        if(is_a($tarjeta, "FranquiciaParcial")){
+            $nuevosaldo = $tarjeta->saldo - $this->costo/2;
+        }
+        if(is_a($tarjeta, "FranquiciaTotal")){
+            $nuevosaldo = $tarjeta->saldo;   
+        }
+        else{
+            $nuevosaldo = $tarjeta->saldo - $this->costo;
+        }
+        
+        if ($nuevosaldo >= $tarjeta->minsaldo){
             $tarjeta->saldo = $nuevosaldo;
-            echo "Saldo restante: " . strval($tarjeta->saldo);
-            return new Boleto($this->costo, $tarjeta->saldo, $this->linea);
+            return new Boleto($this->costo, $tarjeta->saldo, $this->linea, $tarjeta->id, time(), get_class($tarjeta));
         }
         else{
             echo "Saldo insuficiente\n"; 
