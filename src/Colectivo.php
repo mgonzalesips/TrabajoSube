@@ -1,8 +1,6 @@
 <?php
 namespace TrabajoSube;
 
-use function PHPUnit\Framework\assertInstanceOf;
-
 class Colectivo{
     
     public $linea;

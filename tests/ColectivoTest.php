@@ -16,5 +16,5 @@ class ColectivoTest extends TestCase{
         $cole = new Colectivo(102);
         $this->assertInstanceOf(Boleto::class, $cole->pagarCon($tarjeta));   
     }
-
+    
 }

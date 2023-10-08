@@ -19,7 +19,6 @@ class Tarjeta{
     public $maxsaldo = 6600;
     public $id;
 
-
     public function __construct($id = 0){
         $this->saldo = 0;
         $this->id = $id;

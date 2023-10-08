@@ -4,7 +4,6 @@ namespace TrabajoSube;
 
 use PHPUnit\Framework\TestCase;
 
-
 class TarjetaTest extends TestCase {
 
     public $tarjeta = null;
@@ -12,6 +11,15 @@ class TarjetaTest extends TestCase {
     public function setUp(): void
     {
         $this->tarjeta = new Tarjeta();
+    }
+
+    public function testInicializacion()
+    {
+        $tarjeta = new Tarjeta();
+
+        $this->assertEquals(0, $tarjeta->saldo);
+        $this->assertEquals(~211.84, $tarjeta->minsaldo);
+        $this->assertEquals(6600, $tarjeta->maxsaldo);
     }
 
     /**
