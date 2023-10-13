@@ -13,6 +13,7 @@ class Colectivo {
     public function pagarCon($tarjeta, $fecha) {
         if ($tarjeta->getSaldo() >= self::TARIFA) {
             $tarjeta->pagarPasaje(self::TARIFA); // Usamos la constante de tarifa
+
             return new Boleto($this, $tarjeta, $fecha);
         } else {
             if ($tarjeta->getSaldo() <= self::TARIFA) {
