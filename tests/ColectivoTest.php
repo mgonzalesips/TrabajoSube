@@ -53,8 +53,10 @@ class ColectivoTest extends TestCase {
         $colectivo = 115;
         $tarjeta = '4hk32h4k3h2h4';
         $fecha = '24.11.23';
+        $montoPagado = 120;
+        $saldoRestante= 100;
 
-        $boleto = new Boleto($colectivo, $tarjeta, $fecha);
+        $boleto = new Boleto($colectivo, $tarjeta, $fecha, $montoPagado, $saldoRestante);
 
         $this->assertEquals($boleto->getColectivo(), 115);
         $this->assertEquals($boleto->getTarjeta(), '4hk32h4k3h2h4');
