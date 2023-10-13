@@ -2,6 +2,7 @@
 namespace TrabajoSube;
 
 class Jubilado extends Tarjeta {
+    
 
     public function pagarPasaje() {
         $this->saldo -= 0;

@@ -1,34 +1,29 @@
 <?php
+
 namespace TrabajoSube;
 
 use PHPUnit\Framework\TestCase;
 
-class FranquiciaTest extends TestCase  {
+class FranquiciaTest extends TestCase {
 
-    public function testDescuentosJubilados() {
-        $tarjetaJubilado = new Jubilado();
-        $tarjetaJubilado->saldo = 1000;
-        $tarjetaJubilado->pagarPasaje();
-        $this->assertEquals($tarjetaJubilado->getSaldo(), 1000);
-
+    public function testDiscountsRetiree() {
+        $tarjetaRetiree = new Jubilado();
+        $tarjetaRetiree->saldo = 1000;
+        $tarjetaRetiree->pagarPasaje();
+        $this->assertEquals($tarjetaRetiree->getSaldo(), 1000);
     }
 
-
-    public function testDescuentosBoletoGratuito() {
-        $tarjetaGratuita = new BoletoGratuito();
-        $tarjetaGratuita->saldo = 1000;
-        $tarjetaGratuita->pagarPasaje();
-        $this->assertEquals($tarjetaGratuita->getSaldo(), 1000);
-        
+    public function testDiscountsFreeTicket() {
+        $freeTicket = new BoletoGratuito();
+        $freeTicket->saldo = 1000;
+        $freeTicket->pagarPasaje();
+        $this->assertEquals($freeTicket->getSaldo(), 1000);
     }
 
-    public function testDescuentosMedioBoleto() {
-        $tarjetaMedioBoleto = new MedioBoleto();
-        $tarjetaMedioBoleto->saldo = 1000;
-        $tarjetaMedioBoleto->pagarPasaje();
-        $this->assertEquals($tarjetaMedioBoleto->getSaldo(), 940);
-        
+    public function testDiscountsHalfTicket() {
+        $halfTicket = new MedioBoleto();
+        $halfTicket->saldo = 1000;
+        $halfTicket->pagarPasaje();
+        $this->assertEquals($halfTicket->getSaldo(), 940);
     }
 }
-
-

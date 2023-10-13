@@ -2,6 +2,7 @@
 namespace TrabajoSube;
 
 class MedioBoleto extends Tarjeta {
+  
 
     public function pagarPasaje() {
         $this->saldo -= 60;
