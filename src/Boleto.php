@@ -5,11 +5,15 @@ class Boleto {
     public $colectivo;
     public $tarjeta;
     public $fecha;
+    public $montoPagado;
+    public $saldoRestante;
 
-    public function __construct($colectivo,$tarjeta,$fecha) {
+    public function __construct($colectivo, $tarjeta, $fecha, $montoPagado, $saldoRestante) {
         $this->colectivo = $colectivo;
         $this->tarjeta = $tarjeta;
         $this->fecha = $fecha;
+        $this->montoPagado = $montoPagado;
+        $this->saldoRestante = $saldoRestante;
     }
 
     public function getColectivo(){
@@ -24,11 +28,21 @@ class Boleto {
         return $this->fecha;
     }
 
-    /*public function obtenerInfo() {
+    public function getMontoPagado(){
+        return $this->montoPagado;
+    }
+
+    public function getSaldoRestante(){
+        return $this->saldoRestante;
+    }
+
+    public function obtenerInfo() {
+        $descripcion = $this->montoPagado < 0 ? "Abona saldo " . abs($this->montoPagado) : "Total pagado: $" . $this->montoPagado;
         return "Fecha: " . $this->fecha . "\n" .
+               "Tipo de tarjeta: " . get_class($this->tarjeta) . "\n" .
                "Colectivo: Línea " . $this->colectivo->getLinea() . ", Empresa: " . $this->colectivo->getEmpresa() . "\n" .
-               "Monto pagado: $" . $this->tarjeta->getMontoPagado();
-    }*/
+               $descripcion . "\n" .
+               "Saldo restante: $" . $this->saldoRestante;
+    }
 }
 ?>
-
