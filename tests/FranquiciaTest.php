@@ -13,12 +13,12 @@ class FranquiciaTest extends TestCase {
         $this->assertEquals($tarjetaRetiree->getSaldo(), 1000);
     }
 
-   /* public function testDiscountsFreeTicket() {
+    public function testDiscountsFreeTicket() {
         $freeTicket = new Boletogratuito();
         $freeTicket->saldo = 1000;
         $freeTicket->pagarPasaje();
         $this->assertEquals($freeTicket->getSaldo(), 1000);
-    }*/
+    }
 
     public function testDiscountsHalfTicket() {
         $halfTicket = new MedioBoleto();
