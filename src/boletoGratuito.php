@@ -1,10 +1,8 @@
 <?php
 namespace TrabajoSube;
 
-class BoletoGratuito extends Tarjeta {
+class Boletogratuito extends Tarjeta {
    
-   
-
     public function pagarPasaje() {
         $this->saldo -= 0;
     }

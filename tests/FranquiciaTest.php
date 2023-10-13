@@ -14,7 +14,7 @@ class FranquiciaTest extends TestCase {
     }
 
     public function testDiscountsFreeTicket() {
-        $freeTicket = new BoletoGratuito();
+        $freeTicket = new Boletogratuito();
         $freeTicket->saldo = 1000;
         $freeTicket->pagarPasaje();
         $this->assertEquals($freeTicket->getSaldo(), 1000);
