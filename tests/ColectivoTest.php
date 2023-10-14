@@ -103,4 +103,27 @@ class ColectivoTest extends TestCase {
         $this->assertEquals($tarjeta->getSaldo(), 30);
         $this->assertEquals($tarjeta->getMontoPagado(), 120);
     }
+    public function testGetFecha() {
+        // Crea un Boleto con datos de ejemplo
+        $boleto = new Boleto(115, '4hk32h4k3h2h4', '24.11.23', 120, 100);
+
+        // Comprueba si la fecha obtenida es igual a la fecha de ejemplo
+        $this->assertEquals($boleto->getFecha(), '24.11.23');
+    }
+
+    public function testGetMontoPagado() {
+        // Crea un Boleto con datos de ejemplo
+        $boleto = new Boleto(115, '4hk32h4k3h2h4', '24.11.23', 120, 100);
+
+        // Comprueba si el monto pagado obtenido es igual al monto de ejemplo
+        $this->assertEquals($boleto->getMontoPagado(), 120);
+    }
+
+    public function testGetSaldoRestante() {
+        // Crea un Boleto con datos de ejemplo
+        $boleto = new Boleto(115, '4hk32h4k3h2h4', '24.11.23', 120, 100);
+
+        // Comprueba si el saldo restante obtenido es igual al saldo de ejemplo
+        $this->assertEquals($boleto->getSaldoRestante(), 100);
+    }
 }

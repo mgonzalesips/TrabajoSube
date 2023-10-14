@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 class TarjetaViajePlusTest extends TestCase {
     public function testDosViajesPlus() {
         // Creo una tarjeta nueva (comienza con el saldo en 0, es decir, va a tener dos viajes plus)
-        $tarjeta = new Tarjeta($fecha);
+        $tarjeta = new Tarjeta();
         $colecuop = new Colectivo('linea 115');
         $fecha = '1.1.1';
         
@@ -25,7 +25,7 @@ class TarjetaViajePlusTest extends TestCase {
     }
 
     public function testDescuentoViajePlus() {
-        $tarjeta = new Tarjeta($fecha);
+        $tarjeta = new Tarjeta();
 
         // Realizamos un viaje plus
         $tarjeta->realizarViajePlus();
