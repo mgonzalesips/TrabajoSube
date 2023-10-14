@@ -9,22 +9,31 @@ class Colectivo {
         $this->linea = $linea;
     }
 
+    
     public function pagarCon($tarjeta, $fecha) {
         if ($tarjeta->getSaldo() >= self::TARIFA) {
-            $tarjeta->pagarPasaje(self::TARIFA); // Usamos la constante de tarifa
+            // Verificamos el tiempo transcurrido desde el último viaje
+            if ($tarjeta instanceof MedioBoleto && $tarjeta->tiempoDesdeUltimoViaje() < 300) {
+                throw new \Exception("Debes esperar al menos 5 minutos antes de realizar otro viaje.");
+            }
 
-            return new Boleto($this, $tarjeta, $fecha, $montoPagado, $saldoRestante);
+            // Realizamos el viaje y actualizamos el tiempo del último viaje
+            $tarjeta->pagarPasaje(self::TARIFA);
+            $tarjeta->actualizarTiempoUltimoViaje();
+
+            return new Boleto($this, $tarjeta, $fecha, self::TARIFA, $tarjeta->getSaldo());
         } else {
             if ($tarjeta->getSaldo() <= self::TARIFA) {
                 if (($tarjeta->getSaldo() - self::TARIFA) >= (-240)) {
                     $tarjeta->realizarViajePlus();
-                    return new Boleto($this, $tarjeta, $fecha, $montoPagado, $saldoRestante);
+                    return new Boleto($this, $tarjeta, $fecha, self::TARIFA, $tarjeta->getSaldo());
                 } else {
                     throw new \Exception("Saldo insuficiente para realizar un viaje plus.");
                 }
             }
         }
     }
+
 
     public function getLinea() {
         return $this->linea;

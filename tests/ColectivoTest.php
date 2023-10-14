@@ -126,4 +126,43 @@ class ColectivoTest extends TestCase {
         // Comprueba si el saldo restante obtenido es igual al saldo de ejemplo
         $this->assertEquals($boleto->getSaldoRestante(), 100);
     }
+
+//////////////////////////////////////
+public function testMedioBoletoMinimumIntervalBetweenTrips() {
+    $colectivo = new Colectivo('Linea 1');
+    $tarjeta = new MedioBoleto();
+    $fecha1 = '1.1.1';
+    $fecha2 = '1.1.2';
+
+    $boleto1 = $colectivo->pagarCon($tarjeta, $fecha1);
+
+    // Intentar pagar otro viaje en menos de 5 minutos debe lanzar una excepción
+    $this->expectException(\Exception::class);
+    $this->expectExceptionMessage("Debes esperar al menos 5 minutos antes de realizar otro viaje.");
+
+    $boleto2 = $colectivo->pagarCon($tarjeta, $fecha2);
+}
+
+public function testMedioBoletoMaximumTripsPerDay() {
+    $colectivo = new Colectivo('Linea 1');
+    $tarjeta = new MedioBoleto();
+    $fecha = '1.1.1';
+
+    // Realizamos cuatro viajes exitosos
+    for ($i = 0; $i < 4; $i++) {
+        $boleto = $colectivo->pagarCon($tarjeta, $fecha);
+        $this->assertInstanceOf(Boleto::class, $boleto);
+    }
+
+    // Intentar pagar el quinto viaje debe lanzar una excepción
+    $this->expectException(\Exception::class);
+    $this->expectExceptionMessage("No puedes realizar más de cuatro viajes por día con medio boleto.");
+    $boleto5 = $colectivo->pagarCon($tarjeta, $fecha);
+
+    
+}
+
+
+
+
 }

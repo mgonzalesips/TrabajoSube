@@ -50,8 +50,24 @@ class Tarjeta {
         $this->saldo -= self::TARIFA;
     }
 
+
+    public function getUltimoViaje() {
+    return $this->ultimoViaje;
 }
 
+public function tiempoDesdeUltimoViaje() {
+    if ($this->ultimoViaje === null) {
+        return PHP_INT_MAX; // Devuelve un valor muy grande si no hay un último viaje registrado
+    }
+
+    $now = new \DateTime();
+    return $now->getTimestamp() - $this->ultimoViaje->getTimestamp();
+}
+
+public function actualizarTiempoUltimoViaje() {
+    $this->ultimoViaje = new \DateTime();
+}
+}
 ?>
 
 
