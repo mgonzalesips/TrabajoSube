@@ -39,4 +39,24 @@ class TarjetaViajePlusTest extends TestCase {
         // Verificamos que el saldo después del segundo viaje plus sea correcto
         $this->assertEquals($tarjeta->getSaldo(), -240); // El saldo debe ser -240 después del segundo viaje plus
     }
+    public function testJubiladoDiscountsOnViajePlus() {
+        $tarjetaRetiree = new Jubilado();
+        $tarjetaRetiree->saldo = 1000;
+        $tarjetaRetiree->realizarViajePlus();
+        $this->assertEquals($tarjetaRetiree->getSaldo(), 880); // El saldo debe ser 880 después del viaje plus
+    }
+
+    public function testMedioBoletoDiscountsOnViajePlus() {
+        $halfTicket = new MedioBoleto();
+        $halfTicket->saldo = 1000;
+        $halfTicket->realizarViajePlus();
+        $this->assertEquals($halfTicket->getSaldo(), 880); // El saldo debe ser 880 después del viaje plus
+    }
+
+    public function testBoletoGratuitoDiscountsOnViajePlus() {
+        $freeTicket = new BoletoGratuito();
+        $freeTicket->saldo = 1000;
+        $freeTicket->realizarViajePlus();
+        $this->assertEquals($freeTicket->getSaldo(), 880); // El saldo debe ser 880 después del viaje plus
+    }
 }

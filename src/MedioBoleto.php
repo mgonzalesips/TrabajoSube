@@ -9,7 +9,7 @@ class MedioBoleto extends Tarjeta {
     }
 
     public function realizarViajePlus() {
-        $this->saldo -= 60;
+        $this->saldo -= 120;
     }
 }
 ?>

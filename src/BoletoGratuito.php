@@ -9,7 +9,7 @@ class BoletoGratuito extends Tarjeta {
     }
 
     public function realizarViajePlus() {
-        $this->saldo -= 0;
+        $this->saldo -= 120;
     }
     
 }
