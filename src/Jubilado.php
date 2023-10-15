@@ -3,6 +3,7 @@ namespace TrabajoSube;
 
 class Jubilado extends Tarjeta {
     public $ultimoViaje = 0; // Guarda el timestamp del último viaje
+    public $listaViajes = [];
 
     public function pagarPasaje() {
         // Verificamos el tiempo transcurrido desde el último viaje
@@ -14,6 +15,7 @@ class Jubilado extends Tarjeta {
         $this->saldo -= 0;
         $this->actualizarTiempoUltimoViaje();
     }
+    
 
     public function realizarViajePlus() {
         $this->saldo -= 120;

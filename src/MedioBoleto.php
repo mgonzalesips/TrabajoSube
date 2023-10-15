@@ -12,9 +12,13 @@ class MedioBoleto extends Tarjeta {
         } else {
             $hoy = new \DateTime();
 
-            if (count($this->listaViajes) === 0 || $this->listaViajes[0]->format('Y-m-d') !== $hoy->format('Y-m-d') || count($this->listaViajes) < 4) {
+            if (count($this->listaViajes) === 0 || $this->listaViajes[0]->format('Y-m-d') !== $hoy->format('Y-m-d') ) {
                 // Si es el primer viaje del día, reiniciar la lista de viajes
                 $this->listaViajes = [new \DateTime()];
+                $this->saldo -= 60;
+                $this->actualizarTiempoUltimoViaje();
+                $this->listaViajes[] = new \DateTime();
+            } elseif (count($this->listaViajes) < 4){
                 $this->saldo -= 60;
                 $this->actualizarTiempoUltimoViaje();
                 $this->listaViajes[] = new \DateTime();
