@@ -14,8 +14,12 @@ class Colectivo{
         return $this->linea;
     }
 
+    public function chequeoMedio($tarjeta){
+        return (time() - $tarjeta->ultimopago > 300 && $tarjeta->cantboletos);
+    }
+
     public function pagarCon($tarjeta){
-        if(is_a($tarjeta, "FranquiciaParcial")){
+        if(is_a($tarjeta, "FranquiciaParcial") && $this->chequeoMedio($tarjeta)){
             $nuevosaldo = $tarjeta->saldo - $this->costo/2;
         }
         if(is_a($tarjeta, "FranquiciaTotal")){

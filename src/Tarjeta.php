@@ -18,10 +18,12 @@ class Tarjeta{
     public $minsaldo = ~211.84;
     public $maxsaldo = 6600;
     public $id;
+    public $ultimoviaje;
 
     public function __construct($id = 0){
         $this->saldo = 0;
         $this->id = $id;
+        $this->ultimoviaje = 0;
     }
 
     public function cargarDinero($monto){
@@ -35,5 +37,20 @@ class Tarjeta{
             echo "Error en la carga\n";
             return false;
         } 
+    }
+
+    public function chequeoMedio($tarjeta){
+        return (time() - $tarjeta->ultimopago > 300 && $tarjeta->cantboletos);
+    }
+
+    public function viajaMedio($colectivo) {
+        $tiempo_actual = time();
+        if ($this->chequeoMedio($colectivo) && ($tiempo_actual - $this->ultimoviaje >= 300)) {
+            $this->ultimoviaje = $tiempo_actual;
+            $this->descontarBoleto();
+            $colectivo->pagarCon($this);
+        } else {
+            echo "ERROR, debe esperar al menos 5 minutos para abonar otro medio boleto\n";
+        }
     }
 }

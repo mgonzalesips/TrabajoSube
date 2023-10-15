@@ -42,5 +42,22 @@ class TarjetaTest extends TestCase {
         ];
     }
 
+    /* TEST CON ERROR
+    public function testViajaMedio() {
+        $tarjeta = new FranquiciaParcial();
+        $colectivo = new Colectivo('Linea 1');
+    
+        $this->assertEquals(4, $tarjeta->cantboletos);
+    
+        $tarjeta->viajaMedio($colectivo);
+        $this->assertEquals(3, $tarjeta->cantboletos);
+    
+        $this->expectExceptionMessage("ERROR, debe esperar al menos 5 minutos para abonar otro medio boleto");
+        $tarjeta->viajaMedio($colectivo);
+    
+        sleep(360);
+        $tarjeta->viajaMedio($colectivo);
+    }
+    */
 }
 ?>
