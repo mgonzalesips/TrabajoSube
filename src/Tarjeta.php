@@ -39,10 +39,15 @@ class Tarjeta{
         } 
     }
 
+    public function chequeoMedio($tarjeta){
+        return (time() - $tarjeta->ultimopago > 300 && $tarjeta->cantboletos);
+    }
+
     public function viajaMedio($colectivo) {
         $tiempo_actual = time();
         if ($this->chequeoMedio($colectivo) && ($tiempo_actual - $this->ultimoviaje >= 300)) {
             $this->ultimoviaje = $tiempo_actual;
+            $this->descontarBoleto();
             $colectivo->pagarCon($this);
         } else {
             echo "ERROR, debe esperar al menos 5 minutos para abonar otro medio boleto\n";

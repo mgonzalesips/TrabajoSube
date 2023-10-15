@@ -20,6 +20,12 @@ class FranquiciaParcial extends Tarjeta{
     public $ultimopago;
     public $cantboletos;
 
-
+    public function descontarBoleto() {
+        if ($this->cantboletos > 0) {
+            $this->cantboletos--;
+        } else {
+            echo "ERROR, no tienes más boletos disponibles en tu tarjeta.\n";
+        }
+    }
 
 }
