@@ -26,4 +26,74 @@ class FranquiciaTest extends TestCase {
         $halfTicket->pagarPasaje();
         $this->assertEquals($halfTicket->getSaldo(), 940);
     }
+
+    public function testMedioBoletoMinimumIntervalBetweenTrips() {
+        $colectivo = new Colectivo('Linea 1');
+        $tarjeta = new MedioBoleto();
+        $tarjeta->cargarSaldo(600);
+        $fecha1 = '1.1.1';
+        $fecha2 = '1.1.1';
+    
+        $colectivo->pagarCon($tarjeta, $fecha1);
+    
+        // Intentar pagar otro viaje en menos de 5 minutos debe lanzar una excepción
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage("Debes esperar al menos 5 minutos antes de realizar otro viaje.");
+        $colectivo->pagarCon($tarjeta, $fecha2);
+        
+    }
+    
+    public function testMedioBoletoMaximumTripsPerDay() {
+        $colectivo = new Colectivo('Linea 1');
+        $tarjeta = new MedioBoleto();
+        $fecha = '1.1.1';
+        $tarjeta->cargarSaldo(600);
+    
+        // simulamos que hacemos 4 viajes, expandiendo la lista de viajes, ya que sino nos tirar el erros de que no pasaron los 5 minutos
+        for ($i = 0; $i < 4; $i++) {
+            $tarjeta->listaViajes[] = new \DateTime();
+        }
+    
+        $saldo = $tarjeta->getSaldo();
+        $colectivo->pagarCon($tarjeta, $fecha);
+        $this->assertEquals($saldo - $tarjeta->getSaldo(), 120);
+    }
+
+    public function testDosBoletosGratuitosPorDia() {
+        $colectivo = new Colectivo('Linea 1');
+        $tarjeta = new BoletoGratuito();
+        $fecha = '1.1.1';
+        $tarjeta->cargarSaldo(600);
+    
+        // realizamos dos viajes
+        for ($i = 0; $i < 2; $i++) {
+            $colectivo->pagarCon($tarjeta, $fecha);
+            $this->assertEquals($tarjeta->getSaldo(), 600); 
+            //verificamos que pagando dos el mismo dia no se reste nada del saldo
+        }
+    
+        //cuando ya se realizaron los dos viajes que podia hacer en un dia, verifico que se le haya restado el saldo normal
+        $saldo = $tarjeta->getSaldo();
+        $colectivo->pagarCon($tarjeta, $fecha);
+        $this->assertEquals($saldo - $tarjeta->getSaldo(), 120);    
+    }
+
+    public function testDosBoletosJubiladosPorDia() {
+        $colectivo = new Colectivo('Linea 1');
+        $tarjeta = new Jubilado();
+        $fecha = '1.1.1';
+        $tarjeta->cargarSaldo(600);
+    
+        // realizamos dos viajes
+        for ($i = 0; $i < 2; $i++) {
+            $colectivo->pagarCon($tarjeta, $fecha);
+            $this->assertEquals($tarjeta->getSaldo(), 600);
+            //verificamos que pagando dos el mismo dia no se reste nada del saldo
+        }
+    
+        //cuando ya se realizaron los dos viajes que podia hacer en un dia, verifico que se le haya restado el saldo normal
+        $saldo = $tarjeta->getSaldo();
+        $colectivo->pagarCon($tarjeta, $fecha);
+        $this->assertEquals($saldo - $tarjeta->getSaldo(), 120);    
+    }
 }
