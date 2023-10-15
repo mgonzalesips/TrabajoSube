@@ -150,15 +150,18 @@ public function testMedioBoletoMaximumTripsPerDay() {
     $fecha = '1.1.1';
     $tarjeta->cargarSaldo(600);
 
-    // Realizamos cuatro viajes exitosos
+    // Realizamos cuatro viajes
     for ($i = 0; $i < 4; $i++) {
         $tarjeta->listaViajes[] = new \DateTime();
     }
 
-    // Intentar pagar el quinto viaje debe lanzar una excepción
-    $this->expectException(\Exception::class);
-    $this->expectExceptionMessage("Ya has realizado 4 viajes con el medio boleto.");
+    $saldo = $tarjeta->getSaldo();
     $colectivo->pagarCon($tarjeta, $fecha);
+    $this->assertEquals($saldo - $tarjeta->getSaldo(), 120);
+    // Intentar pagar el quinto viaje debe lanzar una excepción
+    /*$this->expectException(\Exception::class);
+    $this->expectExceptionMessage("Ya has realizado 4 viajes con el medio boleto.");
+    $colectivo->pagarCon($tarjeta, $fecha);*/
 
 }
 
