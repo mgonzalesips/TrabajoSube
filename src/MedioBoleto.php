@@ -17,7 +17,6 @@ class MedioBoleto extends Tarjeta {
                 $this->listaViajes = [new \DateTime()];
                 $this->saldo -= 60;
                 $this->actualizarTiempoUltimoViaje();
-                $this->listaViajes[] = new \DateTime();
             } elseif (count($this->listaViajes) < 4){
                 $this->saldo -= 60;
                 $this->actualizarTiempoUltimoViaje();
