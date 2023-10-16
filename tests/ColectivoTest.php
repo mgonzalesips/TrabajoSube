@@ -25,12 +25,37 @@ class ColectivoTest extends TestCase{
         $tarjeta = new FranquiciaParcial();
         $tiempo = new TiempoFalso();
         $cole = new Colectivo(102, $tiempo);
-
-        $tarjeta->cargarDinero(400);
+        
+        $saldoini = 1000;
+        $tarjeta->cargarDinero($saldoini);
+        
+        //Primer pago (aceptado)
         $cole->pagarCon($tarjeta, true);
-        $this->assertEquals($tarjeta->saldo, 400 - $cole->costo/2);
+        $this->assertEquals($tarjeta->saldo, $saldoini - $cole->costo/2);
+        
+        //Segundo pago (rechazado) - No pasaron los 5 minutos
         $cole->tiempo->avanzar(50);
         $cole->pagarCon($tarjeta, true);
-        $this->assertEquals($tarjeta->saldo, 400 - $cole->costo/2);
+        $this->assertEquals($tarjeta->saldo, $saldoini - $cole->costo/2);
+        
+        //Tercer pago (aceptado)
+        $cole->tiempo->avanzar(300);
+        $cole->pagarCon($tarjeta, true);
+        $this->assertEquals($tarjeta->saldo, $saldoini - $cole->costo/2*2);
+        
+        //Cuarto pago (aceptado)
+        $cole->tiempo->avanzar(300);
+        $cole->pagarCon($tarjeta, true);
+        $this->assertEquals($tarjeta->saldo, $saldoini - $cole->costo/2*3);
+        
+        //Quinto pago (aceptado)
+        $cole->tiempo->avanzar(300);
+        $cole->pagarCon($tarjeta, true);
+        $this->assertEquals($tarjeta->saldo, $saldoini - $cole->costo/2*4);
+        
+        //Sexto pago (rechazado) - No hay más boletos
+        $cole->tiempo->avanzar(300);
+        $cole->pagarCon($tarjeta, true);
+        $this->assertEquals($tarjeta->saldo, $saldoini - $cole->costo/2*4);
     }
 }
