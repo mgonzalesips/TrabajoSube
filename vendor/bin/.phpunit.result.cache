@@ -1,1 +1,1 @@
-{"version":1,"defects":[],"times":{"TrabajoSube\\TarjetaTest::testPagarBoleto":0.02}}
+{"version":1,"defects":{"TrabajoSube\\ColectivoTest::testPagarConMedio":7,"TrabajoSube\\ColectivoTest::testPagarCon":7,"TrabajoSube\\ColectivoTest::testConstruct":8,"TrabajoSube\\ColectivoTest::testGetlinea":8},"times":{"TrabajoSube\\TarjetaTest::testPagarBoleto":0.02,"TrabajoSube\\ColectivoTest::testConstruct":0.002,"TrabajoSube\\ColectivoTest::testGetlinea":0,"TrabajoSube\\ColectivoTest::testPagarCon":0.004,"TrabajoSube\\ColectivoTest::testPagarConMedio":0}}

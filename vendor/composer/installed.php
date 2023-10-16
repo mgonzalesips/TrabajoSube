@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '1e95a5841fe77a947cdb2fe22301d7b0c51ae7e2',
+        'reference' => '3e33e7e41f555bab2d15238604baf2f7d62f5afa',
         'name' => 'phpunit/trabajosube',
         'dev' => true,
     ),
@@ -106,7 +106,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '1e95a5841fe77a947cdb2fe22301d7b0c51ae7e2',
+            'reference' => '3e33e7e41f555bab2d15238604baf2f7d62f5afa',
             'dev_requirement' => false,
         ),
         'sebastian/cli-parser' => array(
