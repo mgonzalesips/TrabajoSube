@@ -82,4 +82,26 @@ class ColectivoTest extends TestCase{
         $this->assertEquals($tarjeta->saldo, $saldoini - $cole->costo);
     }
 
+    public function testPagarExcedente(){
+        $tarjeta = new Tarjeta();
+        $cole = new Colectivo(102);
+
+        $tarjeta->cargarDinero(4000);
+        $tarjeta->cargarDinero(3000);
+
+        //Testeo para un caso donde el excedente supere el costo de un boleto
+        $cole->pagarCon($tarjeta);
+        $this->assertEquals($tarjeta->saldo, 6600);
+        $this->assertEquals($tarjeta->excedente, 280);
+        echo $tarjeta->excedente;
+
+        //Testeo para un caso donde el excedente no supere el costo de un boleto
+        $cole->pagarCon($tarjeta);
+        $cole->pagarCon($tarjeta);
+        $cole->pagarCon($tarjeta);
+        $this->assertEquals($tarjeta->saldo, 6520);
+        $this->assertEquals($tarjeta->excedente, 0);
+    }
+
+
 }

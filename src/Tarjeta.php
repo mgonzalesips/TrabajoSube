@@ -18,6 +18,7 @@ class Tarjeta{
     public $minsaldo = ~211.84;
     public $maxsaldo = 6600;
     public $id;
+    public $excedente;
 
     public function __construct($id = 0){
         $this->saldo = 0;
@@ -26,16 +27,23 @@ class Tarjeta{
 
     public function cargarDinero($monto){
         $nuevosaldo = $this->saldo + $monto;
-        if(chequeoCarga($monto) && $nuevosaldo <= $this->maxsaldo){
-            $this->saldo = $nuevosaldo;
-            echo "Saldo actual: " . strval($nuevosaldo) . "\n";
-            return $nuevosaldo;
+        if(chequeoCarga($monto)){
+            if($nuevosaldo <= $this->maxsaldo){
+                $this->saldo = $nuevosaldo;
+                echo "Saldo actual: " . strval($this->saldo) . "\n";
+                return $this->saldo;
+            }
+            else{
+                $this->saldo = $this->maxsaldo;
+                $this->excedente = $nuevosaldo - $this->maxsaldo;
+                echo "Saldo actual: " . strval($this->saldo) . ". Excedente: ". strval($this->excedente) ."\n";
+                return $this->saldo;
+            }
         }
-            
         else{
-            echo "Error en la carga\n";
-            return false;
-        } 
+            echo "ERROR. Ingrese un monto válido";
+        }
+        
     }
 
 }

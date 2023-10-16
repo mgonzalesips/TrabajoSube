@@ -75,6 +75,12 @@ class Colectivo{
         /*--------------------------------------------------------------------------------*/
         
         if ($nuevosaldo >= $tarjeta->minsaldo){
+            $diff = $tarjeta->saldo - $nuevosaldo; 
+            if($tarjeta->excedente > 0){
+                $nuevosaldo = min($tarjeta->maxsaldo, $tarjeta->excedente + $nuevosaldo);
+                $tarjeta->excedente = max($tarjeta->excedente - $diff, 0);
+                
+            }
             $tarjeta->saldo = $nuevosaldo;
             return new Boleto($this->costo, $tarjeta->saldo, $this->linea, $tarjeta->id, time(), get_class($tarjeta));
         }
