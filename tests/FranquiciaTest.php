@@ -96,4 +96,29 @@ class FranquiciaTest extends TestCase {
         $colectivo->pagarCon($tarjeta, $fecha);
         $this->assertEquals($saldo - $tarjeta->getSaldo(), 120);    
     }
+
+    /*public function testCargaExceso() {
+        $tarjeta = new Tarjeta();
+        $tarjeta->cargarSaldo(8000);
+
+        $this->assertEquals($tarjeta->getSaldo(), 6600);
+        $this->assertEquals($tarjeta->montoRestante, 8000-6600);
+    }*/ //HAY QUE VER COMO HACER PORQUE 8000 NO ES UNA CARGA VALIDA, POR ESO TIRA ERROR
+
+    public function testCargandoSaldoDemas() {
+        $tarjeta = new Tarjeta();
+        $tarjeta->cargarSaldo(6600);
+
+        $this->assertEquals($tarjeta->getSaldo(), 6600);
+
+        //como el saldo ya tiene la carga maxima, verifico que lo que quiera cargar sea el montoRestante
+        $tarjeta->cargarSaldo(3500);
+        $this->assertEquals($tarjeta->montoRestante, 3500);
+
+        //pago un pasaje, para que se le reste 120, cuando se le resta 120 le quedan 120 libres en el saldo para cargar y los carga
+        //luego verifico que en montoRestante se le hayan restado 120
+        $tarjeta->pagarPasaje();
+        $this->assertEquals($tarjeta->montoRestante, 3500-120);
+    }
+
 }
