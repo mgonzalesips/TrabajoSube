@@ -17,7 +17,7 @@ class Colectivo{
     }
 
     public function chequeoMedio($tarjeta){
-        $tarjeta->renovarBoletos();
+        $tarjeta->renovarBoletos($this->tiempo->time());
         
         if($tarjeta->hayBoletos()){
             if($tarjeta->pasoDelTiempo($this->tiempo->time())){ 
@@ -31,6 +31,11 @@ class Colectivo{
             return false;
         } 
     }
+
+    public function chequeoCompleto($tarjeta){
+        $tarjeta->renovarBoletos($this->tiempo->time());
+        return ($tarjeta->hayBoletos());
+    }
     /*
         El argumento $contemplo_beneficio es equivalente a cuando el conductor del colectivo presiona el botón
         para cobrar el boleto teniendo en cuenta el beneficio o la franquicia de la tarjeta. De esta forma si una persona
@@ -39,7 +44,7 @@ class Colectivo{
         el valor completo del boleto.
     */
 
-    public function pagarCon($tarjeta, $contemplo_beneficio){
+    public function pagarCon($tarjeta, $contemplo_beneficio = false){
         if($tarjeta instanceof FranquiciaParcial && $contemplo_beneficio){
             if($this->chequeoMedio($tarjeta)){
                 $nuevosaldo = $tarjeta->saldo - $this->costo/2;
@@ -53,8 +58,14 @@ class Colectivo{
             }
         }
         /*--------------------------------------------------------------------------------*/
-        else if($tarjeta instanceof FranquiciaCompleta && $contemplo_beneficio){
-            $nuevosaldo = $tarjeta->saldo;   
+        else if($tarjeta instanceof FranquiciaCompleta){
+            if($this->chequeoCompleto($tarjeta)){
+                $nuevosaldo = $tarjeta->saldo;
+                $tarjeta->cantboletos--;
+            }
+            else{
+                $nuevosaldo = $tarjeta->saldo - $this->costo;
+            }
         }
         /*--------------------------------------------------------------------------------*/
 

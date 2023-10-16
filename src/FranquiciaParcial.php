@@ -10,10 +10,12 @@ class FranquiciaParcial extends Tarjeta{
         $this->cantboletos = 4;
         $this->dia = date("d", time());
     }
-    
-    public function renovarBoletos(){
-        if($this->dia != date("d", time())){
+    //Modificar esta funcion para que tambien funcione con TiempoFalso
+    public function renovarBoletos($tiempo){
+        $dia = date("d", $tiempo);
+        if($this->dia != $dia){
             $this->cantboletos = 4;
+            $this->dia = $dia;
         }
     }
     public $dia;
