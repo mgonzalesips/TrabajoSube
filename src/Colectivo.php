@@ -12,11 +12,6 @@ class Colectivo {
     
     public function pagarCon($tarjeta, $fecha) {
         if ($tarjeta->getSaldo() >= self::TARIFA) {
-            // Verificamos el tiempo transcurrido desde el último viaje
-            if ($tarjeta instanceof MedioBoleto && $tarjeta->tiempoDesdeUltimoViaje() < 300) {
-                throw new \Exception("Debes esperar al menos 5 minutos antes de realizar otro viaje.");
-            }
-
             // Realizamos el viaje y actualizamos el tiempo del último viaje
             $tarjeta->pagarPasaje(self::TARIFA);
             $tarjeta->actualizarTiempoUltimoViaje();
