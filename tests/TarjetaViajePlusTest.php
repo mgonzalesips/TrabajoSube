@@ -59,4 +59,9 @@ class TarjetaViajePlusTest extends TestCase {
         $freeTicket->realizarViajePlus();
         $this->assertEquals($freeTicket->getSaldo(), 880); // El saldo debe ser 880 después del viaje plus
     }
+
+    public function testRandom(){
+        $medio =  new MedioBoleto();
+        $this->assertEquals($medio::TARIFA,120);
+    }
 }

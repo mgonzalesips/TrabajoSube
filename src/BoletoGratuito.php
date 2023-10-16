@@ -17,14 +17,14 @@ class BoletoGratuito extends Tarjeta {
             $this->actualizarTiempoUltimoViaje();
             $this->listaViajes[] = new \DateTime();
         } else {
-            $this->saldo -= 120;
+            $this->saldo -= self::TARIFA;
             $this->actualizarTiempoUltimoViaje();
             $this->listaViajes[] = new \DateTime();
         }
     }
 
     public function realizarViajePlus() {
-        $this->saldo -= 120;
+        $this->saldo -= self::TARIFA;
     }
 
     public function tiempoDesdeUltimoViaje() {
