@@ -18,7 +18,7 @@ class ColectivoTest extends TestCase{
     public function testPagarCon(){
         $tarjeta = new Tarjeta();
         $cole = new Colectivo(102, new Tiempo());
-        $this->assertInstanceOf(Boleto::class, $cole->pagarCon($tarjeta, false));   
+        $this->assertInstanceOf(Boleto::class, $cole->pagarCon($tarjeta));   
     }
 
     public function testPagarConMedio(){
@@ -58,4 +58,28 @@ class ColectivoTest extends TestCase{
         $cole->pagarCon($tarjeta, true);
         $this->assertEquals($tarjeta->saldo, $saldoini - $cole->costo/2*4);
     }
+
+    public function testPagarConCompleto(){
+        $tarjeta = new FranquiciaCompleta();
+        $cole = new Colectivo(102, new TiempoFalso());
+
+        $saldoini = 1000;
+        $tarjeta->cargarDinero($saldoini);
+
+        $cole->pagarCon($tarjeta);
+        $this->assertEquals($tarjeta->saldo, $saldoini);
+    
+        $cole->pagarCon($tarjeta);
+        $this->assertEquals($tarjeta->saldo, $saldoini);
+
+        $cole->pagarCon($tarjeta);
+        $this->assertEquals($tarjeta->saldo, $saldoini - $cole->costo);
+        
+        //Pasan 24 horas y se renuevan la cantidad de boletos
+        $cole->tiempo->avanzar(60*60*24);
+
+        $cole->pagarCon($tarjeta);
+        $this->assertEquals($tarjeta->saldo, $saldoini - $cole->costo);
+    }
+
 }
