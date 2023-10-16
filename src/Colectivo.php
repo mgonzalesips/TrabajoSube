@@ -5,9 +5,11 @@ class Colectivo{
     
     public $linea;
     public $costo = 120;
+    public $tiempo;
 
-    public function __construct($linea){
+    public function __construct($linea, $tiempo = null){
         $this->linea = $linea;
+        $this->tiempo = ($tiempo !== null) ? $tiempo : new Tiempo();
     }
 
     public function getLinea(){
@@ -15,19 +17,51 @@ class Colectivo{
     }
 
     public function chequeoMedio($tarjeta){
-        return (time() - $tarjeta->ultimopago > 300 && $tarjeta->cantboletos);
-    }
-
-    public function pagarCon($tarjeta){
-        if(is_a($tarjeta, "FranquiciaParcial") && $this->chequeoMedio($tarjeta)){
-            $nuevosaldo = $tarjeta->saldo - $this->costo/2;
+        $tarjeta->renovarBoletos();
+        
+        if($tarjeta->hayBoletos()){
+            if($tarjeta->pasoDelTiempo($this->tiempo->time())){ 
+                return true;
+            }
+            else{
+                return false;
+            } 
         }
-        if(is_a($tarjeta, "FranquiciaTotal")){
+        else{
+            return false;
+        } 
+    }
+    /*
+        El argumento $contemplo_beneficio es equivalente a cuando el conductor del colectivo presiona el botón
+        para cobrar el boleto teniendo en cuenta el beneficio o la franquicia de la tarjeta. De esta forma si una persona
+        que ya uso su medio boleto quiere pagar de vuelta un medio boleto ($contemplo_beneficio = true) se arrojará un error.
+        Sin embargo si la persona quiere pagar un boleto normal ($conemtplo_beneficio = false) podrá hacerlo descontándosele 
+        el valor completo del boleto.
+    */
+
+    public function pagarCon($tarjeta, $contemplo_beneficio){
+        if($tarjeta instanceof FranquiciaParcial && $contemplo_beneficio){
+            if($this->chequeoMedio($tarjeta)){
+                $nuevosaldo = $tarjeta->saldo - $this->costo/2;
+                if($nuevosaldo >= $tarjeta->minsaldo){
+                    $tarjeta->ultimopago = $this->tiempo->time();
+                    $tarjeta->cantboletos--;
+                }
+            }
+            else{
+                return false;
+            }
+        }
+        /*--------------------------------------------------------------------------------*/
+        else if($tarjeta instanceof FranquiciaCompleta && $contemplo_beneficio){
             $nuevosaldo = $tarjeta->saldo;   
         }
+        /*--------------------------------------------------------------------------------*/
+
         else{
             $nuevosaldo = $tarjeta->saldo - $this->costo;
         }
+        /*--------------------------------------------------------------------------------*/
         
         if ($nuevosaldo >= $tarjeta->minsaldo){
             $tarjeta->saldo = $nuevosaldo;
