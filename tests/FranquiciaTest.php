@@ -35,6 +35,12 @@ class FranquiciaTest extends TestCase {
     public function testDiscountsHalfTicket() {
         $halfTicket = new MedioBoleto();
         $halfTicket->saldo = 1000;
+
+        // hardcodeamos la fecha y hora para que el test no tire error cuando lo probamos en un dia u hora no adeacuados
+        $halfTicket->hoy = new \DateTime(); // Crear un objeto DateTime
+        $halfTicket->hoy->setISODate(date('Y'), date('W'), 2); // Establecer el día de la semana (lunes)
+        $halfTicket->hoy->setTime(9, 0, 0); // Establecer la hora a las 9:00 AM
+         
         $halfTicket->pagarPasaje();
         $this->assertEquals($halfTicket->getSaldo(), 940);
     }
@@ -47,6 +53,11 @@ class FranquiciaTest extends TestCase {
         $fecha2 = '1.1.1';
     
         $colectivo->pagarCon($tarjeta, $fecha1);
+
+        // hardcodeamos la fecha y hora para que el test no tire error cuando lo probamos en un dia u hora no adeacuados
+        $tarjeta->hoy = new \DateTime(); // Crear un objeto DateTime
+        $tarjeta->hoy->setISODate(date('Y'), date('W'), 2); // Establecer el día de la semana (lunes)
+        $tarjeta->hoy->setTime(9, 0, 0); // Establecer la hora a las 9:00 AM
     
         // Intentar pagar otro viaje en menos de 5 minutos debe lanzar una excepción
         $this->expectException(\Exception::class);
@@ -160,11 +171,27 @@ class FranquiciaTest extends TestCase {
         $this->assertEquals($saldo - $tarjeta->getSaldo(), Tarjeta::TARIFA * 0.75);
     }
 
-    public function testDiaDeSemanaEnHora(){
+    public function testFuncionDiaDeSemanaEnHora(){
         $tarjeta = new MedioBoleto();
 
+        // hardcodeamos la fecha y hora para que el test no tire error cuando lo probamos en un dia u hora no adeacuados
+        $tarjeta->hoy = new \DateTime(); // Crear un objeto DateTime
+        $tarjeta->hoy->setISODate(date('Y'), date('W'), 2); // Establecer el día de la semana (lunes)
+        $tarjeta->hoy->setTime(9, 0, 0); // Establecer la hora a las 9:00 AM
+
         $this->assertTrue($tarjeta->diaDeSemanaEntre6amY10pm());
-    }    
+    }  
+    
+    public function testFuncionDiaFueraDeSemanaEnHora(){
+        $tarjeta = new MedioBoleto();
+
+        // hardcodeamos la fecha y hora para que el test no tire error cuando lo probamos en un dia u hora no adeacuados
+        $tarjeta->hoy = new \DateTime(); // Crear un objeto DateTime
+        $tarjeta->hoy->setISODate(date('Y'), date('W'), 2); // Establecer el día de la semana (lunes)
+        $tarjeta->hoy->setTime(5, 0, 0); // Establecer la hora a las 9:00 AM
+
+        $this->assertFalse($tarjeta->diaDeSemanaEntre6amY10pm());
+    } 
 
     public function testHorariosNoPermitidosJubilados(){
         $tarjeta = new Jubilado();
