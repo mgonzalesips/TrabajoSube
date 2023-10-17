@@ -121,4 +121,33 @@ class FranquiciaTest extends TestCase {
         $this->assertEquals($tarjeta->montoRestante, 3500-120);
     }
 
+    public function testDescuentoPorDia() {
+        $tarjeta = new Tarjeta();
+
+        // Cargar suficiente saldo
+        $tarjeta->cargarSaldo(6600);
+
+        // Realizar 29 viajes
+        for ($i = 0; $i < 29; $i++) {
+            $tarjeta->pagarPasaje();
+        }
+
+        // Realizar el viaje 30, debería aplicarse un descuento del 20%
+        $saldo = $tarjeta->getSaldo();
+        $tarjeta->pagarPasaje();
+        $this->assertEquals($saldo - $tarjeta->getSaldo(), Tarjeta::TARIFA * 0.8);
+
+        $tarjeta->cargarSaldo(6600); //cargo mas saldo
+        for ($i = 0; $i < 50; $i++) {
+            $tarjeta->pagarPasaje();
+        }
+
+        // Realizar el viaje 80, debería aplicarse un descuento del 25%
+        $saldo = $tarjeta->getSaldo();
+        $tarjeta->pagarPasaje();
+        $this->assertEquals($saldo - $tarjeta->getSaldo(), Tarjeta::TARIFA * 0.75);
+
+    }
+
+
 }

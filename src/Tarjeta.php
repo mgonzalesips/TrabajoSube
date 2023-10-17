@@ -5,6 +5,7 @@ class Tarjeta {
     public $saldo;
     public $montoPagado;
     public $montoRestante;
+    public $listaViajesDelMes = [];
 
     const TARIFA = 120;
     const CARGAS_VALIDAS = [150, 200, 250, 300, 350, 400, 450, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 2000, 2500, 3000, 3500, 4000, 6600];
@@ -13,6 +14,7 @@ class Tarjeta {
     public function __construct() {
         $this->saldo = 0;
         $this->montoPagado = 0;
+        $this->listaViajes = [];
     }
 
     public function cargarSaldo($monto) {
@@ -28,8 +30,32 @@ class Tarjeta {
     }
 
     public function pagarPasaje() {
-        $this->montoPagado += self::TARIFA;
-        $this->saldo -= self::TARIFA;
+        //$this->saldo -= self::TARIFA;
+
+        //if ($this->montoRestante != 0){
+        //    $this->cargarSaldo($this->montoRestante);
+        //}
+
+        $hoy = new \DateTime();
+
+        if (count($this->listaViajesDelMes) === 0 || $this->listaViajesDelMes[0]->format('Y-m') !== $hoy->format('Y-m') ) {
+            // Si es el primer viaje del mes, reiniciar la lista de viajes
+            $this->listaViajesDelMes = [new \DateTime()];
+            $this->saldo -= self::TARIFA;
+            $this->montoPagado += self::TARIFA;
+        } elseif (count($this->listaViajesDelMes) > 1 && count($this->listaViajesDelMes) < 29){
+            $this->saldo -= self::TARIFA;
+            $this->listaViajesDelMes[] = new \DateTime();
+            $this->montoPagado += self::TARIFA;
+        } elseif (count($this->listaViajesDelMes) >= 29 && count($this->listaViajesDelMes) < 79){
+            $this->saldo -= self::TARIFA * 0.8;
+            $this->listaViajesDelMes[] = new \DateTime();
+            $this->montoPagado += self::TARIFA * 0.8;
+        } else {
+            $this->saldo -= self::TARIFA * 0.75;
+            $this->listaViajesDelMes[] = new \DateTime();
+            $this->montoPagado += self::TARIFA * 0.75;
+        }
 
         if ($this->montoRestante != 0){
             $this->cargarSaldo($this->montoRestante);
