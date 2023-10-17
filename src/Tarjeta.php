@@ -91,6 +91,35 @@ public function tiempoDesdeUltimoViaje() {
 public function actualizarTiempoUltimoViaje() {
     $this->ultimoViaje = new \DateTime();
 }
+
+public function pagarPasajeInterUrbano(){
+
+    $hoy = new \DateTime();
+
+    if (count($this->listaViajesDelMes) === 0 || $this->listaViajesDelMes[0]->format('Y-m') !== $hoy->format('Y-m') ) {
+        // Si es el primer viaje del mes, reiniciar la lista de viajes
+        $this->listaViajesDelMes = [new \DateTime()];
+        $this->saldo -= 184;
+        $this->montoPagado +=  184;
+    } elseif (count($this->listaViajesDelMes) > 1 && count($this->listaViajesDelMes) < 29){
+        $this->saldo -=  184;
+        $this->listaViajesDelMes[] = new \DateTime();
+        $this->montoPagado +=  184;
+    } elseif (count($this->listaViajesDelMes) >= 29 && count($this->listaViajesDelMes) < 79){
+        $this->saldo -=  184 * 0.8;
+        $this->listaViajesDelMes[] = new \DateTime();
+        $this->montoPagado +=  184 * 0.8;
+    } else {
+        $this->saldo -=  184 * 0.75;
+        $this->listaViajesDelMes[] = new \DateTime();
+        $this->montoPagado +=  184 * 0.75;
+    }
+
+    if ($this->montoRestante != 0){
+        $this->cargarSaldo($this->montoRestante);
+    }
+}
+
 }
 ?>
 

@@ -46,7 +46,7 @@ class FranquiciaTest extends TestCase {
     }
 
     public function testMedioBoletoMinimumIntervalBetweenTrips() {
-        $colectivo = new Colectivo('Linea 1');
+        $colectivo = new Colectivo('Linea 1','no');
         $tarjeta = new MedioBoleto();
         $tarjeta->cargarSaldo(600);
         $fecha1 = '1.1.1';
@@ -67,7 +67,7 @@ class FranquiciaTest extends TestCase {
     }
     
     public function testMedioBoletoMaximumTripsPerDay() {
-        $colectivo = new Colectivo('Linea 1');
+        $colectivo = new Colectivo('Linea 1','no');
         $tarjeta = new MedioBoleto();
         $fecha = '1.1.1';
         $tarjeta->cargarSaldo(600);
@@ -83,7 +83,7 @@ class FranquiciaTest extends TestCase {
     }
 
     public function testDosBoletosGratuitosPorDia() {
-        $colectivo = new Colectivo('Linea 1');
+        $colectivo = new Colectivo('Linea 1','no');
         $tarjeta = new BoletoGratuito();
         $fecha = '1.1.1';
         $tarjeta->cargarSaldo(600);
@@ -102,7 +102,7 @@ class FranquiciaTest extends TestCase {
     }
 
     public function testDosBoletosJubiladosPorDia() {
-        $colectivo = new Colectivo('Linea 1');
+        $colectivo = new Colectivo('Linea 1','no');
         $tarjeta = new Jubilado();
         $fecha = '1.1.1';
         $tarjeta->cargarSaldo(600);
@@ -210,7 +210,7 @@ class FranquiciaTest extends TestCase {
     public function testHorariosPermitidosJubilados(){
         $tarjeta = new Jubilado();
         $tarjeta->saldo = 1000;
-        $colectivo = new Colectivo('Linea 1');
+        $colectivo = new Colectivo('Linea 1','no');
         
         // hardcodeamos la fecha y hora para que el tire error cuando lo probamos en un dia u hora no adeacuados
         $tarjeta->hoy = new \DateTime(); // Crear un objeto DateTime
