@@ -9,6 +9,12 @@ class FranquiciaTest extends TestCase {
     public function testDiscountsRetiree() {
         $tarjetaRetiree = new Jubilado();
         $tarjetaRetiree->saldo = 1000;
+
+        // hardcodeamos la fecha y hora para que el test no tire error cuando lo probamos en un dia u hora no adeacuados
+        $tarjetaRetiree->hoy = new \DateTime(); // Crear un objeto DateTime
+        $tarjetaRetiree->hoy->setISODate(date('Y'), date('W'), 2); // Establecer el día de la semana (lunes)
+        $tarjetaRetiree->hoy->setTime(9, 0, 0); // Establecer la hora a las 9:00 AM
+
         $tarjetaRetiree->pagarPasaje();
         $this->assertEquals($tarjetaRetiree->getSaldo(), 1000);
     }
@@ -16,6 +22,12 @@ class FranquiciaTest extends TestCase {
     public function testDiscountsFreeTicket() {
         $freeTicket = new BoletoGratuito();
         $freeTicket->saldo = 1000;
+
+        // hardcodeamos la fecha y hora para que el test no tire error cuando lo probamos en un dia u hora no adeacuados
+        $freeTicket->hoy = new \DateTime(); // Crear un objeto DateTime
+        $freeTicket->hoy->setISODate(date('Y'), date('W'), 2); // Establecer el día de la semana (lunes)
+        $freeTicket->hoy->setTime(9, 0, 0); // Establecer la hora a las 9:00 AM
+
         $freeTicket->pagarPasaje();
         $this->assertEquals($freeTicket->getSaldo(), 1000);
     }           
@@ -146,8 +158,12 @@ class FranquiciaTest extends TestCase {
         $saldo = $tarjeta->getSaldo();
         $tarjeta->pagarPasaje();
         $this->assertEquals($saldo - $tarjeta->getSaldo(), Tarjeta::TARIFA * 0.75);
-
     }
 
+    public function testDiaDeSemanaEnHora(){
+        $tarjeta = new MedioBoleto();
+
+        $this->assertTrue($tarjeta->diaDeSemanaEntre6amY10pm());
+    }    
 
 }
