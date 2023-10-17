@@ -166,4 +166,33 @@ class FranquiciaTest extends TestCase {
         $this->assertTrue($tarjeta->diaDeSemanaEntre6amY10pm());
     }    
 
+    public function testHorariosNoPermitidosJubilados(){
+        $tarjeta = new Jubilado();
+        $tarjeta->saldo = 1000;
+
+        // hardcodeamos la fecha y hora para que el tire error cuando lo probamos en un dia u hora no adeacuados
+        $tarjeta->hoy = new \DateTime(); // Crear un objeto DateTime
+        $tarjeta->hoy->setISODate(date('Y'), date('W'), 2); // Establecer el día de la semana (lunes)
+        $tarjeta->hoy->setTime(5, 0, 0); // Establecer la hora a las 5:00 AM
+
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage("No se encuentra en el intervalo de tiempo permitido para utilizar la tarjeta.");
+        $tarjeta->pagarPasaje();
+    }
+
+    public function testHorariosPermitidosJubilados(){
+        $tarjeta = new Jubilado();
+        $tarjeta->saldo = 1000;
+        $colectivo = new Colectivo('Linea 1');
+        
+        // hardcodeamos la fecha y hora para que el tire error cuando lo probamos en un dia u hora no adeacuados
+        $tarjeta->hoy = new \DateTime(); // Crear un objeto DateTime
+        $tarjeta->hoy->setISODate(date('Y'), date('W'), 2); // Establecer el día de la semana (lunes)
+        $tarjeta->hoy->setTime(16, 0, 0); // Establecer la hora a las 6:00 PM
+
+        $boleto = $colectivo->pagarCon($tarjeta, '1.1.1');
+        $this->assertInstanceOf(Boleto::class, $boleto);
+        
+    }
+
 }
