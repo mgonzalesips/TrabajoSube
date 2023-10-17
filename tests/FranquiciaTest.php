@@ -51,13 +51,13 @@ class FranquiciaTest extends TestCase {
         $tarjeta->cargarSaldo(600);
         $fecha1 = '1.1.1';
         $fecha2 = '1.1.1';
-    
-        $colectivo->pagarCon($tarjeta, $fecha1);
 
         // hardcodeamos la fecha y hora para que el test no tire error cuando lo probamos en un dia u hora no adeacuados
         $tarjeta->hoy = new \DateTime(); // Crear un objeto DateTime
         $tarjeta->hoy->setISODate(date('Y'), date('W'), 2); // Establecer el día de la semana (lunes)
         $tarjeta->hoy->setTime(9, 0, 0); // Establecer la hora a las 9:00 AM
+    
+        $colectivo->pagarCon($tarjeta, $fecha1);
     
         // Intentar pagar otro viaje en menos de 5 minutos debe lanzar una excepción
         $this->expectException(\Exception::class);
