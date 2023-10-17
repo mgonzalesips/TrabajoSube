@@ -222,4 +222,17 @@ class FranquiciaTest extends TestCase {
         
     }
 
+    public function testInterUrbano() {
+        $tarjeta = new Tarjeta();
+        $tarjeta->saldo = 1000;
+        $fecha = '1.1.1';
+        $colectivo = new Colectivo('Linea 1','si');
+
+        $saldo1 = $tarjeta->getSaldo();
+        $colectivo->pagarCon($tarjeta, $fecha);
+        $saldo2 = $tarjeta->getSaldo();
+
+        $this->assertEquals($saldo1 - $saldo2, 184);
+    }
+
 }
