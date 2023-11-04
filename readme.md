@@ -129,5 +129,31 @@ En la fecha pactada comenzará la defensa y devolución del trabajo realizado. P
 - El correcto funcionamiento del código.
 - Uso de git.
 
+## Iteracion 5 (Recuperatiorio)
+
+A modo de recuperatorio deberan presentar de forma *individual* un TP cada uno, ya no trabajaran en grupo. La fecha de entrega de esta quinta iteracion sera el 14/11/2023. 
+Esta iteracion consistira en las siguientes consignas y deberan estar *todas* completas.
+Aclaracion: Cada clase debe estar en un archivo distinto y a su vez cada clase de test debe estar en un archivo distinto. Como la ultima vez, se evaluara tanto el codigo en php como los tests y el uso de git.
+
+## Iteracion 1 a 4
+- Todas las consignas y tests planteados en las iteraciones anteriores deberan estar completas.
+
+## Tests
+- El codigo debera estar testeado en su totalidad. No solo los test pedidos explicitamente en el enunciado sino todos los que crean necesarios y deberan tener una covertura de al menos 90%.
+
+## Tarifas
+ - Actualizar la tarifa normal a $185.
+ - Actualizar la tarifa interurbana a $300
+
+## Transbordos
+Un usuario de la tarjeta SUBE puede realizar transbordos entre colectivos sin costo de acuerdo a las siguientes condiciones:
+
+- El usuario puede realizar transbordos sin limite en un plazo de 1 hora desde que se pago el primer boleto pero el transbordo debe ser entre lineas distintas.
+- Los transbordos se pueden realizar de lunes a sabado de 7:00 a 22:00.
+- Todas las tarjetas pueden realizar transbordos.
+
+Cuando se paga un transbordo el colectivo emite un boleto indicando que se pago trasnbordo.
+
+Cualquier duda o consulta me pueden enviar un mail: [mgonzales@ips.edu.ar](mgonzales@ips.edu.ar)
 
 
