@@ -131,7 +131,7 @@ En la fecha pactada comenzará la defensa y devolución del trabajo realizado. P
 
 ## Iteracion 5 (Recuperatiorio)
 
-A modo de recuperatorio deberan presentar de forma *individual* un TP cada uno, ya no trabajaran en grupo. La fecha de entrega de esta quinta iteracion sera el 14/11/2023. 
+A modo de recuperatorio deberan presentar de forma *individual* un TP cada uno, ya no trabajaran en grupo. La fecha de entrega y defensa de esta quinta iteracion sera el 17/11/2023(horario a confirmar).
 Esta iteracion consistira en las siguientes consignas y deberan estar *todas* completas.
 Aclaracion: Cada clase debe estar en un archivo distinto y a su vez cada clase de test debe estar en un archivo distinto. Como la ultima vez, se evaluara tanto el codigo en php como los tests y el uso de git.
 
